@@ -1,0 +1,46 @@
+{
+  "status": 0,
+  "result": {
+    "records": [
+      {
+        "attributes": {
+          "type": "AgentWork",
+          "url": "/services/data/v67.0/sobjects/AgentWork/0BzO300000BIpP7KAL"
+        },
+        "Id": "0BzO300000BIpP7KAL",
+        "CreatedDate": "2026-08-06T13:49:48.000+0000",
+        "Status": "Closed"
+      },
+      {
+        "attributes": {
+          "type": "AgentWork",
+          "url": "/services/data/v67.0/sobjects/AgentWork/0BzO300000BIp0vKAD"
+        },
+        "Id": "0BzO300000BIp0vKAD",
+        "CreatedDate": "2026-08-06T13:43:09.000+0000",
+        "Status": "Closed"
+      },
+      {
+        "attributes": {
+          "type": "AgentWork",
+          "url": "/services/data/v67.0/sobjects/AgentWork/0BzO300000BIozJKAT"
+        },
+        "Id": "0BzO300000BIozJKAT",
+        "CreatedDate": "2026-08-06T13:43:05.000+0000",
+        "Status": "Abandoned"
+      },
+      {
+        "attributes": {
+          "type": "AgentWork",
+          "url": "/services/data/v67.0/sobjects/AgentWork/0BzO300000BIoxhKAD"
+        },
+        "Id": "0BzO300000BIoxhKAD",
+        "CreatedDate": "2026-08-06T13:43:03.000+0000",
+        "Status": "Closed"
+      }
+    ],
+    "totalSize": 4,
+    "done": true
+  },
+  "warnings": []
+}

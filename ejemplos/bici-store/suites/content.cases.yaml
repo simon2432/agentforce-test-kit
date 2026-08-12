@@ -1,0 +1,140 @@
+suite: content
+agent: bici-store
+description: >
+  Aserciones DETERMINISTAS de contenido y de estado, vía customEvaluations.
+
+  Regla central: se asserta el OUTPUT DE LA ACCIÓN, no la respuesta al usuario.
+  El output del Apex es byte-exacto y estable; la respuesta final varía entre
+  corridas y hasta dentro de la misma corrida (el agente agrega texto propio).
+
+  🚩 TRAMPA: todo caso con una ref cruda DEBE llevar `topic` en `expect`. Sin
+  expectedTopic el traductor no agrega el paso `agent.get_state` y la ref queda
+  sin resolver — comparando el texto del template contra el valor esperado, con
+  exit 0 y sin ningún error. Ver VALIDACION.md, Fase 3 §D.
+
+  engines: sólo run-eval. `test run` requiere Testing Center, no disponible en
+  esta org, y su vocabulario de rutas (`generatedData`) es más chico.
+
+_paths:
+  accionInput: &accionInput "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.input.consulta}"
+  accionOutput: &accionOutput "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+  encuestaEtapa: &encuestaEtapa "{gs.response.planner_response.sessionContext.stateVariables.encuestaEtapa}"
+
+cases:
+  # --- 1. El input que recibió la acción ---------------------------------
+  - id: K1
+    utterance: ¿A qué hora abren?
+    expect:
+      topic: Faq
+      match: exact
+    engines: [run-eval]
+    gate: true
+    severity: routing
+    customEvaluations:
+      - name: string_comparison
+        label: input_pasa_verbatim
+        parameters:
+          - { name: operator, value: equals }
+          - { name: actual, value: *accionInput }
+          - { name: expected, value: ¿A qué hora abren? }
+    note: >
+      Verifica que el planner pasa la consulta del usuario tal cual al Apex.
+      En el bundle publicado `consulta` es is_required=True; en v1 era False.
+
+  # --- 2. La respuesta literal del Apex, byte-exacta ---------------------
+  - id: K2
+    utterance: ¿A qué hora abren?
+    expect:
+      topic: Faq
+      match: exact
+    engines: [run-eval]
+    gate: true
+    severity: routing
+    customEvaluations:
+      - name: string_comparison
+        label: respuesta_literal_horario
+        parameters:
+          - { name: operator, value: equals }
+          - { name: actual, value: *accionOutput }
+          - { name: expected, value: Abrimos de lunes a sábado de 9 a 19 horas. }
+
+  - id: K3
+    utterance: ¿Cuánto demora el envío?
+    expect:
+      topic: Faq
+      match: exact
+    engines: [run-eval]
+    gate: true
+    severity: routing
+    customEvaluations:
+      - name: string_comparison
+        label: respuesta_literal_envio
+        parameters:
+          - { name: operator, value: equals }
+          - { name: actual, value: *accionOutput }
+          - { name: expected, value: El envío a domicilio demora entre 3 y 5 días hábiles. }
+
+  # --- 3. Caso negativo: consulta sin match en el Apex -------------------
+  - id: K4
+    utterance: ¿Tienen cascos?
+    expect:
+      topic: Faq
+      match: exact
+    engines: [run-eval]
+    gate: true
+    severity: routing
+    customEvaluations:
+      - name: string_comparison
+        label: fallback_del_apex
+        parameters:
+          - { name: operator, value: equals }
+          - { name: actual, value: *accionOutput }
+          - { name: expected, value: No tengo información sobre esa consulta. }
+    note: >
+      Ninguno de los 10 stems del Apex matchea 'casco'. El fallback es tan
+      determinista como las respuestas: se asserta igual.
+
+  # --- 4. Control secundario sobre la respuesta al usuario ---------------
+  - id: K5
+    utterance: ¿A qué hora abren?
+    expect:
+      topic: Faq
+      match: exact
+    engines: [run-eval]
+    gate: true
+    severity: routing
+    customEvaluations:
+      - name: string_comparison
+        label: respuesta_usuario_contiene_el_literal
+        parameters:
+          - { name: operator, value: contains }
+          - { name: actual, value: $.generatedData.outcome }
+          - { name: expected, value: Abrimos de lunes a sábado de 9 a 19 horas. }
+    note: >
+      `contains`, NUNCA `equals`. El agente conserva el literal del Apex pero le
+      agrega texto propio, y ese agregado varía entre corridas y dentro de la
+      misma corrida. Medido: 3 sufijos distintos en 3 corridas.
+
+  # --- 5. La máquina de estados, nativa ---------------------------------
+  - id: K6
+    utterance: No, gracias, eso es todo
+    expect:
+      topic: Encuesta
+      match: exact
+      utilActions: [setEncuestaEtapa]
+      stateVariables:
+        encuestaEtapa: esperando_nota
+    engines: [run-eval]
+    gate: true
+    severity: routing
+    customEvaluations:
+      - name: string_comparison
+        label: state_encuestaEtapa
+        parameters:
+          - { name: operator, value: equals }
+          - { name: actual, value: *encuestaEtapa }
+          - { name: expected, value: esperando_nota }
+    note: >
+      El mismo hecho assertado por las dos vías: nativa (customEvaluations) y por
+      wrapper (expect.stateVariables). Se dejan las dos a propósito — la nativa
+      mueve el reporte de la CLI, la del wrapper mueve el exit code.

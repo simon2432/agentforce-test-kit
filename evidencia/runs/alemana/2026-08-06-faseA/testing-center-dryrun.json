@@ -1,0 +1,75 @@
+{
+  "status": 0,
+  "result": {
+    "checkOnly": true,
+    "completedDate": "2026-08-06T22:31:13.000Z",
+    "createdBy": "005O300000mB48C",
+    "createdByName": "Simon Feeney",
+    "createdDate": "2026-08-06T22:31:13.000Z",
+    "details": {
+      "componentSuccesses": [
+        {
+          "changed": true,
+          "componentType": "AiEvaluationDefinition",
+          "created": true,
+          "createdDate": "2026-08-06T22:31:13.000Z",
+          "deleted": false,
+          "fileName": "aiEvaluationDefinitions/Kit_Alemana_Preflight.aiEvaluationDefinition",
+          "fullName": "Kit_Alemana_Preflight",
+          "id": "4KCO30000000pDpOAI",
+          "success": true
+        },
+        {
+          "changed": true,
+          "componentType": "",
+          "created": false,
+          "createdDate": "2026-08-06T22:31:13.000Z",
+          "deleted": false,
+          "fileName": "package.xml",
+          "fullName": "package.xml",
+          "success": true
+        }
+      ],
+      "runTestResult": {
+        "numFailures": 0,
+        "numTestsRun": 0,
+        "totalTime": 0,
+        "codeCoverage": [],
+        "codeCoverageWarnings": [],
+        "failures": [],
+        "flowCoverage": [],
+        "flowCoverageWarnings": [],
+        "successes": []
+      },
+      "componentFailures": []
+    },
+    "done": true,
+    "id": "0AfO300000hh4NlKAI",
+    "ignoreWarnings": false,
+    "lastModifiedDate": "2026-08-06T22:31:13.000Z",
+    "numberComponentErrors": 0,
+    "numberComponentsDeployed": 1,
+    "numberComponentsTotal": 1,
+    "numberFiles": "3",
+    "numberTestErrors": 0,
+    "numberTestsCompleted": 0,
+    "numberTestsTotal": 0,
+    "rollbackOnError": true,
+    "runTestsEnabled": false,
+    "startDate": "2026-08-06T22:31:13.000Z",
+    "status": "Succeeded",
+    "success": true,
+    "zipSize": 1062,
+    "files": [
+      {
+        "fullName": "Kit_Alemana_Preflight",
+        "type": "AiEvaluationDefinition",
+        "state": "Created",
+        "filePath": "C:\\Users\\simon\\Desktop\\agentforce-test-kit\\agents\\alemana\\sfdx\\force-app\\main\\default\\aiEvaluationDefinitions\\Kit_Alemana_Preflight.aiEvaluationDefinition-meta.xml"
+      }
+    ],
+    "zipFileCount": 2,
+    "deployUrl": "https://orgalemana--antartida.sandbox.my.salesforce.com/lightning/setup/DeployStatus/page?address=%2Fchangemgmt%2FmonitorDeploymentsDetails.apexp%3FasyncId%3D0AfO300000hh4NlKAI%26retURL%3D%252Fchangemgmt%252FmonitorDeployment.apexp"
+  },
+  "warnings": []
+}

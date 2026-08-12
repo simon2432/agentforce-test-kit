@@ -1,0 +1,17 @@
+name: state
+description: >
+  Multi-turno y estado de sesión. Verifica la máquina de estados de la encuesta
+  (no_iniciada -> esperando_nota -> esperando_comentario) y el desvío de ruteo
+  por siembra de state variables.
+
+  ⚠️ La cadena se corta en `esperando_comentario` a propósito. Llegar a `lista`
+  no dispara nada en este fixture, pero un caso de encuesta no se extiende más
+  allá de lo necesario.
+
+  🚨 `encuestaEtapa` es una state variable inocua. NUNCA sembrar un Id real
+  (RoutableId, CaseId): es el único vector que reactiva DML. Ver
+  knowledge/05-safety.md — verificado en la Fase 1: bajo test las variables
+  `linked` llegan todas null.
+subjectType: AGENT
+subjectName: Bici_Store
+testCases: []

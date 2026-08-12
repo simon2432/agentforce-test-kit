@@ -1,0 +1,15 @@
+{
+  "name": "DeploymentFailed",
+  "message": "Deployment failed: Not available for deploy for this organization",
+  "exitCode": 4,
+  "actions": [
+    "Not available for deploy for this organization"
+  ],
+  "context": "AgentTestCreate",
+  "stack": "DeploymentFailed: Deployment failed: Not available for deploy for this organization\n    at SfCommandError.from (file:///C:/Users/simon/AppData/Local/sf/client/2.144.6-5aff6b2/node_modules/@salesforce/sf-plugins-core/lib/SfCommandError.js:48:16)\n    at AgentTestCreate.catch (file:///C:/Users/simon/AppData/Local/sf/client/2.144.6-5aff6b2/node_modules/@salesforce/sf-plugins-core/lib/sfCommand.js:332:47)\n    at AgentTestCreate.catch (file:///C:/Users/simon/AppData/Local/sf/client/2.144.6-5aff6b2/node_modules/@salesforce/plugin-agent/lib/commands/agent/test/create.js:190:27)\n    at AgentTestCreate._run (C:\\Users\\simon\\AppData\\Local\\sf\\client\\2.144.6-5aff6b2\\node_modules\\@oclif\\core\\lib\\command.js:187:29)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async Config.runCommand (C:\\Users\\simon\\AppData\\Local\\sf\\client\\2.144.6-5aff6b2\\node_modules\\@oclif\\core\\lib\\config\\config.js:422:25)\n    at async run (C:\\Users\\simon\\AppData\\Local\\sf\\client\\2.144.6-5aff6b2\\node_modules\\@oclif\\core\\lib\\main.js:97:16)\n    at async file:///C:/Users/simon/AppData/Local/sf/client/2.144.6-5aff6b2/bin/run.js:15:1",
+  "cause": "SfError: Not available for deploy for this organization\n    at AgentTest.create (C:\\Users\\simon\\AppData\\Local\\sf\\client\\2.144.6-5aff6b2\\node_modules\\@salesforce\\agents\\lib\\agentTest.js:166:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n    at async AgentTestCreate.run (file:///C:/Users/simon/AppData/Local/sf/client/2.144.6-5aff6b2/node_modules/@salesforce/plugin-agent/lib/commands/agent/test/create.js:151:28)\n    at async AgentTestCreate._run (C:\\Users\\simon\\AppData\\Local\\sf\\client\\2.144.6-5aff6b2\\node_modules\\@oclif\\core\\lib\\command.js:183:22)\n    at async Config.runCommand (C:\\Users\\simon\\AppData\\Local\\sf\\client\\2.144.6-5aff6b2\\node_modules\\@oclif\\core\\lib\\config\\config.js:422:25)\n    at async run (C:\\Users\\simon\\AppData\\Local\\sf\\client\\2.144.6-5aff6b2\\node_modules\\@oclif\\core\\lib\\main.js:97:16)\n    at async file:///C:/Users/simon/AppData/Local/sf/client/2.144.6-5aff6b2/bin/run.js:15:1 {\n  actions: undefined,\n  exitCode: 1,\n  context: undefined,\n  data: undefined,\n  cause: undefined\n}",
+  "warnings": [],
+  "code": "DeploymentFailed",
+  "status": 4,
+  "commandName": "AgentTestCreate"
+}

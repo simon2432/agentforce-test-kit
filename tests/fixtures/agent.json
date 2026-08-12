@@ -1,0 +1,15 @@
+{
+  "$comment": "FIXTURE generado por build.mjs. Recorte de evidencia/agente-alemana/agent.json a los campos que lee lib/report.mjs.",
+  "slug": "alemana",
+  "apiName": "AGENTFORCE_Agent_Alemana_Go",
+  "label": "AGENTFORCE- Agent Alemana Go",
+  "org": {
+    "alias": "clinica-alemana",
+    "orgId": "00DO300000SGmzpMAD"
+  },
+  "quality": {
+    "respondingTopics": [
+      "GeneralFAQ"
+    ]
+  }
+}

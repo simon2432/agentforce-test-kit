@@ -1,0 +1,6 @@
+name: preflight_bici_store
+subjectType: AGENT
+subjectName: Bici_Store
+testCases:
+  - utterance: ¿A qué hora abren?
+    expectedTopic: __SONDA_SIN_MATCH__

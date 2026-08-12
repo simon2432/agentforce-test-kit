@@ -1,0 +1,67 @@
+{
+  "endTime": "2026-08-06T22:49:04Z",
+  "startTime": "2026-08-06T22:48:37Z",
+  "status": "COMPLETED",
+  "subjectName": "Kit_Alemana_HumanRule",
+  "testCases": [
+    {
+      "endTime": "2026-08-06T22:49:02Z",
+      "generatedData": {
+        "actionsSequence": "[&#39;AGENTFORCE_Business_Hours_Verifier&#39;]",
+        "generatedResponse": "User requested escalation to human.",
+        "invokedActions": "[[{\"function\":{\"name\":\"AGENTFORCE_Business_Hours_Verifier\"}}]]",
+        "outcome": "User requested escalation to human.",
+        "sessionId": "019fd943-dfe2-7b7f-922e-44c8433f3a73",
+        "topic": "human"
+      },
+      "inputs": {
+        "utterance": "Necesito hablar con un ejecutivo, por favor"
+      },
+      "startTime": "2026-08-06T22:48:37Z",
+      "status": "COMPLETED",
+      "testNumber": 1,
+      "testResults": [
+        {
+          "actualValue": "human",
+          "endTime": "2026-08-06T22:49:03Z",
+          "errorCode": 0,
+          "expectedValue": "human",
+          "metricLabel": "topic_assertion",
+          "name": "topic_assertion",
+          "result": "PASS",
+          "score": 1,
+          "startTime": "2026-08-06T22:48:51Z",
+          "status": "COMPLETED",
+          "metricExplainability": ""
+        },
+        {
+          "actualValue": "['AGENTFORCE_Business_Hours_Verifier']",
+          "endTime": "2026-08-06T22:49:03Z",
+          "errorCode": 0,
+          "expectedValue": "[]",
+          "metricLabel": "actions_assertion",
+          "name": "actions_assertion",
+          "result": "PASS",
+          "score": 1,
+          "startTime": "2026-08-06T22:48:51Z",
+          "status": "COMPLETED",
+          "metricExplainability": ""
+        },
+        {
+          "actualValue": "User requested escalation to human.",
+          "endTime": "2026-08-06T22:49:03Z",
+          "errorCode": 0,
+          "errorMessage": "Skip metric result due to missing expected input",
+          "metricLabel": "output_validation",
+          "name": "output_validation",
+          "result": "FAILURE",
+          "score": 0,
+          "startTime": "2026-08-06T22:48:51Z",
+          "status": "ERROR",
+          "expectedValue": "",
+          "metricExplainability": ""
+        }
+      ]
+    }
+  ]
+}

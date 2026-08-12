@@ -1,0 +1,176 @@
+# FASE 3 — customEvaluations. Exploratorio.
+#
+# El formato NO está documentado. Sale de leer el código del plugin instalado:
+#   @salesforce/agents/lib/yamlSpecTranslator.js
+#
+#   customEvaluations:
+#     - name: <string_comparison | numeric_comparison | cualquier otro>
+#       parameters:
+#         - { name: operator, value: <op> }
+#         - { name: actual,   value: <path o ref> }
+#         - { name: expected, value: <valor> }
+#
+#   name           -> string_comparison  = evaluator.string_assertion
+#                     numeric_comparison = evaluator.numeric_assertion
+#                     cualquier otro     = evaluator.<name>   (passthrough)
+#
+#   actual         -> ACTUAL_PATH_MAP traduce SÓLO 4 rutas:
+#                       $.generatedData.outcome          -> {sm.response}
+#                       $.generatedData.topic            -> {gs...lastExecution.topic}
+#                       $.generatedData.invokedActions   -> {gs...lastExecution.invokedActions}
+#                       $.generatedData.actionsSequence  -> idem (el alias roto de D2)
+#                     Cualquier otra ruta pasa TAL CUAL. Eso es lo que habilita
+#                     llegar a function.output.respuesta: se escribe la ref cruda.
+#
+# 🚩 TRAMPA encontrada en el código: needsPlannerState() sólo agrega el paso
+#    `agent.get_state` si el `actual` es una de esas 4 rutas conocidas, o si el
+#    caso tiene expectedTopic / expectedActions no vacío. Con una ref cruda y sin
+#    expectedTopic, el paso `gs` NO se agrega y la ref no resuelve nada.
+#    Por eso TODOS los casos de acá llevan expectedTopic.
+
+name: fase3_custom_evals
+subjectType: AGENT
+subjectName: Bici_Store
+testCases:
+
+  # ---- 1. El input que recibió la acción -------------------------------
+  - utterance: ¿A qué hora abren?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: CE1_input_de_la_accion
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.input.consulta}"
+          - name: expected
+            value: ¿A qué hora abren?
+
+  # ---- 2. La respuesta literal del Apex, byte-exacta -------------------
+  - utterance: ¿A qué hora abren?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: CE2_output_literal_equals
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+          - name: expected
+            value: Abrimos de lunes a sábado de 9 a 19 horas.
+
+  # ---- 3. CONTROL NEGATIVO: mismo path, expected equivocado -----------
+  #      Si esto PASA, las aserciones de arriba son vacías y no prueban nada.
+  - utterance: ¿A qué hora abren?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: CE3_control_debe_fallar
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+          - name: expected
+            value: ESTE TEXTO NO ES EL DEL APEX
+
+  # ---- 4. Caso negativo del Apex: consulta sin match ------------------
+  - utterance: ¿Tienen cascos?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: CE4_fallback_del_apex
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+          - name: expected
+            value: No tengo información sobre esa consulta.
+
+  - utterance: ¿Venden luces para la bici?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: CE5_fallback_del_apex_bis
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+          - name: expected
+            value: No tengo información sobre esa consulta.
+
+  # ---- 6. Ruta DOCUMENTADA como control: $.generatedData.topic --------
+  - utterance: ¿A qué hora abren?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: CE6_ruta_mapeada_topic
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: $.generatedData.topic
+          - name: expected
+            value: Faq
+
+  # ---- 7. La respuesta AL USUARIO con contains (control secundario) ---
+  - utterance: ¿A qué hora abren?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: CE7_respuesta_usuario_contains
+        parameters:
+          - name: operator
+            value: contains
+          - name: actual
+            value: $.generatedData.outcome
+          - name: expected
+            value: Abrimos de lunes a sábado de 9 a 19 horas.
+
+  # ---- 8. La respuesta AL USUARIO con equals: DEBE fallar -------------
+  #      El agente le agrega texto. Es la prueba de por qué el assert va
+  #      sobre el output de la acción y no sobre la respuesta final.
+  - utterance: ¿A qué hora abren?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: CE8_respuesta_usuario_equals_debe_fallar
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: $.generatedData.outcome
+          - name: expected
+            value: Abrimos de lunes a sábado de 9 a 19 horas.
+
+  # ---- 9. ¿Alcanza stateVariables? (P24 + P20 unificadas) ------------
+  - utterance: No, gracias, eso es todo
+    expectedTopic: Encuesta
+    customEvaluations:
+      - name: string_comparison
+        label: CE9_state_encuestaEtapa
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.sessionContext.stateVariables.encuestaEtapa}"
+          - name: expected
+            value: esperando_nota
+
+  # ---- 10. ¿Alcanza executionHistory? --------------------------------
+  - utterance: No, gracias, eso es todo
+    expectedTopic: Encuesta
+    customEvaluations:
+      - name: string_comparison
+        label: CE10_exechistory_actionName
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.sessionContext.executionHistory[3].actionName}"
+          - name: expected
+            value: setEncuestaEtapa

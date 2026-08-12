@@ -1,0 +1,17 @@
+node_modules/
+
+# Salidas de corridas nuevas, en la raíz. Las de evidencia/ SÍ se versionan.
+/runs/
+agents/*/runs/
+
+# Estado local de la CLI de Salesforce
+.sf/
+.sfdx/
+
+# 🔒 Evidencia de la investigación. Contiene metadata real de un cliente.
+# Descomentar antes de publicar el repo fuera del equipo.
+# evidencia/
+
+.DS_Store
+Thumbs.db
+*.tmp

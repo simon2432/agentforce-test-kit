@@ -1,0 +1,66 @@
+# P10 — ¿por qué no llega la siembra?
+#
+# Hipótesis: la `visibility` declarada en el .agent decide si una state variable
+# se puede sembrar desde afuera.
+#
+#   encuestaEtapa : visibility "Internal"   <- la que falló
+#   endUserEmail  : visibility "External"
+#
+# Discriminador: sembrar las dos EN EL MISMO create_session y leer
+# sessionContext.stateVariables. Si llega la External y no la Internal, la
+# hipótesis queda confirmada y el problema no es del motor.
+#
+# 🚨 Se siembran sólo valores SIN forma de Id. `endUserEmail` es un string libre
+# y ninguna acción de este agente lo consume (Apex auditado: cero DML, cero SOQL).
+
+name: p10_visibility
+subjectType: AGENT
+subjectName: Bici_Store
+testCases:
+
+  # A — siembra doble: una Internal y una External
+  - utterance: ¿A qué hora abren?
+    contextVariables:
+      - name: encuestaEtapa
+        value: esperando_nota
+      - name: endUserEmail
+        value: sonda-no-es-un-id@ejemplo.test
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: INTERNAL_encuestaEtapa
+        parameters:
+          - { name: operator, value: equals }
+          - { name: actual, value: "{gs.response.planner_response.sessionContext.stateVariables.encuestaEtapa}" }
+          - { name: expected, value: esperando_nota }
+      - name: string_comparison
+        label: EXTERNAL_endUserEmail
+        parameters:
+          - { name: operator, value: equals }
+          - { name: actual, value: "{gs.response.planner_response.sessionContext.stateVariables.endUserEmail}" }
+          - { name: expected, value: sonda-no-es-un-id@ejemplo.test }
+
+  # B — misma siembra Internal, con el prefijo $Context. (el otro namespace)
+  - utterance: ¿A qué hora abren?
+    contextVariables:
+      - name: $Context.encuestaEtapa
+        value: esperando_nota
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: CONTEXT_prefijo
+        parameters:
+          - { name: operator, value: equals }
+          - { name: actual, value: "{gs.response.planner_response.sessionContext.stateVariables.encuestaEtapa}" }
+          - { name: expected, value: esperando_nota }
+
+  # C — control: sin siembra ninguna
+  - utterance: ¿A qué hora abren?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: CONTROL_sin_siembra
+        parameters:
+          - { name: operator, value: equals }
+          - { name: actual, value: "{gs.response.planner_response.sessionContext.stateVariables.encuestaEtapa}" }
+          - { name: expected, value: no_iniciada }

@@ -1,0 +1,109 @@
+{
+  "$comment": "Registro del agente sujeto de la validación. Los topics NO salen de acá: salen de vocabulary.json, escrito desde el runtime en la Fase 1.",
+
+  "slug": "bici-store",
+  "apiName": "Bici_Store",
+  "label": "Bici Store",
+
+  "org": {
+    "alias": "OrgAntartida",
+    "orgId": "00Dal00000JfUW4EAN",
+    "instanceUrl": "https://antartida.my.salesforce.com",
+    "username": "ncapiel@antartida.io",
+    "isSandbox": false,
+    "$comment": "El orgId es la guarda: el preflight verifica que el alias resuelva a este Id. OJO: NO es sandbox (Enterprise Edition con trial hasta 2027-05-25). El agente es un fixture y sus acciones no hacen DML (auditado), pero la regla de no sembrar Ids reales rige con más fuerza acá."
+  },
+
+  "agentType": "EinsteinServiceAgent",
+  "botDefinitionId": "0Xxal000000rUCrCAM",
+  "agentTemplate": "SvcCopilotTmpl__AgentforceServiceAgent",
+  "agentScript": true,
+
+  "authoringBundle": "Bici_Store_2",
+  "$comment_authoringBundle": "ACTUALIZADO EN LA FASE 0-bis. Bici_Store_2 (retraído localmente como carpeta 'Bici_Store') es ahora el bundle publicado: su bundle-meta.xml lleva <target>Bici_Store.v2</target>. Bici_Store_1 respalda v1 (<target>Bici_Store.v1</target>). Los dos compilan y son equivalentes en comportamiento; difieren en comentarios, descripciones de inputs y en is_required de 'consulta' (False en v1, True en v2). run-eval testea v2: confirmado por sessionContext.tags.bot_version_id.",
+
+  "language": "es",
+  "$comment_language": "default_locale es_MX, voz rioplatense (voseo). Las utterances se escriben en español.",
+
+  "version": {
+    "pinned": null,
+    "resolved": 2,
+    "status": "Active",
+    "botVersionId": "0X9al000000qaVdCAI",
+    "verifiedAt": "2026-08-05T19:07:07Z",
+    "previous": { "version": 1, "status": "Inactive", "botVersionId": "0X9al000000qaU1CAI" },
+    "$comment": "✅ Regla 12 de CLAUDE.md: PASA. v2 es la de mayor VersionNumber y es la Active. 🚩 Pero D8+D14 (Fase 0-ter): `run-eval` sirve la de mayor número IGNORANDO Status — medido con v1 Active y v2 Inactive, sirvió v2. Que acá coincidan es una coincidencia mantenida a propósito, no una garantía del motor. Verificar SIEMPRE las dos puntas: SOQL antes, bot_version_id después.",
+    "verifyFromRun": "$.result.tests[*].outputs[?(@.type=='agent.get_state')].response.planner_response.sessionContext.tags.bot_version_id",
+    "$comment_verifyFromRun": "Verificación post-hoc de versión, desde la corrida misma. Cierra la ventana de carrera entre el preflight por SOQL y el run. El JSONPath es sobre la salida de --json; con --result-format json la raíz es $.results[*]."
+  },
+
+  "engines": {
+    "default": "run-eval",
+    "batchSize": 1,
+    "resultFlag": "--json",
+    "$comment_resultFlag": "OBLIGATORIO --json, no --result-format json. Son dos formatos distintos: --json da {status, result:{tests,summary}, warnings} (lo que parsea lib/assert.mjs, stdout limpio); --result-format json da {results:[...]} precedido de una línea de texto en stdout. knowledge/04-spec-formats.md documenta el flag equivocado. Ver VALIDACION.md, Fase 0-bis §C."
+  },
+
+  "subagents": [
+    {
+      "name": "router",
+      "start": true,
+      "purpose": "Clasifica cada mensaje y transiciona. Sólo @utils.transition.",
+      "actions": ["go_to_faq", "go_to_consejos", "go_to_off_topic", "go_to_escalar", "go_to_encuesta"],
+      "writesData": false
+    },
+    {
+      "name": "Faq",
+      "purpose": "Preguntas frecuentes de la tienda. Camino determinista.",
+      "actions": ["consultar_faq", "go_to_escalar"],
+      "$comment_actions": "Nombres confirmados contra el runtime (sessionContext.plugins + invokedActions[].function.name), no leídos del .agent. El alias es 'consultar_faq'; 'BiciStoreFaq' es el target apex:// y NO aparece nunca en la salida.",
+      "actionTargets": ["apex://BiciStoreFaq"],
+      "writesData": false,
+      "$comment_writesData": "Apex auditado: sin DML, sin SOQL. Map de 10 respuestas literales + fallback. Ver runs/2026-08-05T18-45-preflight/apex-BiciStoreFaq.json."
+    },
+    {
+      "name": "Consejos",
+      "purpose": "Consejos generales de uso y mantenimiento. Camino no determinista.",
+      "actions": ["generar_consejos"],
+      "actionTargets": ["generatePromptResponse://Bici_Store_Consejos"],
+      "writesData": false
+    },
+    {
+      "name": "OffTopic",
+      "purpose": "Rechazo con texto fijo. Sin acciones. Contiene además las reglas anti-inyección.",
+      "actions": [],
+      "writesData": false
+    },
+    {
+      "name": "Escalar",
+      "purpose": "Derivación a humano vía @utils.escalate. La org NO tiene colas de Omni-Channel: no puede completarse.",
+      "actions": ["@utils.escalate"],
+      "writesData": false
+    },
+    {
+      "name": "Encuesta",
+      "purpose": "Encuesta de cierre multi-turno. Sólo @utils.setVariables sobre encuestaEtapa / encuestaNota / encuestaComentario.",
+      "actions": ["@utils.setVariables"],
+      "writesData": false
+    }
+  ],
+
+  "stateVariables": {
+    "encuestaEtapa": ["no_iniciada", "esperando_nota", "esperando_comentario", "lista"],
+    "encuestaNota": "string",
+    "encuestaComentario": "string",
+    "$comment": "Son las únicas variables inocuas para sembrar por contextVariables. RoutableId / EndUserId / ContactId son `linked` y NUNCA se siembran."
+  },
+
+  "quality": {
+    "respondingTopics": [],
+    "$comment": "Se completa en la Fase 5, con los topics observados. coherence/completeness castigan los rechazos correctos: OffTopic y escalación quedan fuera del promedio."
+  },
+
+  "orgConstraints": {
+    "dataCloud": false,
+    "observability": false,
+    "omniChannelQueues": false,
+    "$comment": "Sin Data Cloud ni observability: la evidencia por UI de Testing Center no se puede validar. Sin colas: la escalación no puede completarse."
+  }
+}

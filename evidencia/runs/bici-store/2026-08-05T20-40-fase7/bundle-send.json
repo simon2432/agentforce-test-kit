@@ -1,0 +1,21 @@
+{
+  "status": 0,
+  "result": {
+    "messages": [
+      {
+        "type": "Inform",
+        "id": "f824e17f-7f24-460b-a54e-0e6c988449b0",
+        "metrics": {},
+        "feedbackId": "f514947e-3000-4b8d-ba6c-f329a5c6e2ae",
+        "planId": "f514947e-3000-4b8d-ba6c-f329a5c6e2ae",
+        "isContentSafe": true,
+        "message": "Abrimos de lunes a sábado de 9 a 19 horas. ¿Querés consultar algo más sobre nuestros servicios o productos?",
+        "result": [],
+        "citedReferences": []
+      }
+    ],
+    "agentApiName": "Bici_Store",
+    "sessionId": "01a62d12-71bf-404c-b39f-9008025fd27f"
+  },
+  "warnings": []
+}

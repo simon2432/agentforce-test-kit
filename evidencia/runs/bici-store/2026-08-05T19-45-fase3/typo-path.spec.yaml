@@ -1,0 +1,44 @@
+# ¿Una ruta MAL ESCRITA (pero con get_state presente) se comporta igual que una
+# ruta sin resolver por falta de get_state? Distingue "el agente dio otro valor"
+# de "tu spec tiene un typo" — que es lo único que un wrapper puede usar para
+# detectar specs rotos.
+name: fase3_typo_path
+subjectType: AGENT
+subjectName: Bici_Store
+testCases:
+  - utterance: ¿A qué hora abren?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: TYPO_campo_inexistente
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuestaXX}"
+          - name: expected
+            value: Abrimos de lunes a sábado de 9 a 19 horas.
+  - utterance: ¿A qué hora abren?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: TYPO_rama_inexistente
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.NO_EXISTE.nada}"
+          - name: expected
+            value: Abrimos de lunes a sábado de 9 a 19 horas.
+  - utterance: ¿A qué hora abren?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: INDICE_fuera_de_rango
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[9][9].function.output.respuesta}"
+          - name: expected
+            value: Abrimos de lunes a sábado de 9 a 19 horas.

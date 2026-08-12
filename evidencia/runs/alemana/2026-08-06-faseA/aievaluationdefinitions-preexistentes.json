@@ -1,0 +1,58 @@
+{
+  "status": 0,
+  "result": [
+    {
+      "createdById": "005O300000mB48CIAS",
+      "createdByName": "Simon Feeney",
+      "createdDate": "2026-08-04T18:41:36.000Z",
+      "fileName": "aiEvaluationDefinitions/Spike_Simon_03.aiEvaluationDefinition",
+      "fullName": "Spike_Simon_03",
+      "id": "4KCO30000000p0vOAA",
+      "lastModifiedById": "005O300000mB48CIAS",
+      "lastModifiedByName": "Simon Feeney",
+      "lastModifiedDate": "2026-08-04T18:41:36.000Z",
+      "manageableState": "unmanaged",
+      "type": "AiEvaluationDefinition"
+    },
+    {
+      "createdById": "005O300000mB48CIAS",
+      "createdByName": "Simon Feeney",
+      "createdDate": "2026-08-04T18:50:33.000Z",
+      "fileName": "aiEvaluationDefinitions/Spike_Simon_02.aiEvaluationDefinition",
+      "fullName": "Spike_Simon_02",
+      "id": "4KCO30000000p49OAA",
+      "lastModifiedById": "005O300000mB48CIAS",
+      "lastModifiedByName": "Simon Feeney",
+      "lastModifiedDate": "2026-08-04T18:50:33.000Z",
+      "manageableState": "unmanaged",
+      "type": "AiEvaluationDefinition"
+    },
+    {
+      "createdById": "005O300000mB48CIAS",
+      "createdByName": "Simon Feeney",
+      "createdDate": "2026-08-04T18:12:47.000Z",
+      "fileName": "aiEvaluationDefinitions/Spike_Simon_01.aiEvaluationDefinition",
+      "fullName": "Spike_Simon_01",
+      "id": "4KCO30000000ozJOAQ",
+      "lastModifiedById": "005O300000mB48CIAS",
+      "lastModifiedByName": "Simon Feeney",
+      "lastModifiedDate": "2026-08-04T18:12:47.000Z",
+      "manageableState": "unmanaged",
+      "type": "AiEvaluationDefinition"
+    },
+    {
+      "createdById": "005O300000mB48CIAS",
+      "createdByName": "Simon Feeney",
+      "createdDate": "2026-08-05T12:53:55.000Z",
+      "fileName": "aiEvaluationDefinitions/Spike_Simon_20.aiEvaluationDefinition",
+      "fullName": "Spike_Simon_20",
+      "id": "4KCO30000000p5lOAA",
+      "lastModifiedById": "005O300000mB48CIAS",
+      "lastModifiedByName": "Simon Feeney",
+      "lastModifiedDate": "2026-08-05T12:53:55.000Z",
+      "manageableState": "unmanaged",
+      "type": "AiEvaluationDefinition"
+    }
+  ],
+  "warnings": []
+}

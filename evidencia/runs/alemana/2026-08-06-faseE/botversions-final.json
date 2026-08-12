@@ -1,0 +1,190 @@
+{
+  "status": 0,
+  "result": {
+    "records": [
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004h1ZKAQ"
+        },
+        "Id": "0X9O30000004h1ZKAQ",
+        "VersionNumber": 29,
+        "Status": "Active",
+        "DeveloperName": "v29"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004gzxKAA"
+        },
+        "Id": "0X9O30000004gzxKAA",
+        "VersionNumber": 28,
+        "Status": "Inactive",
+        "DeveloperName": "v28"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004grtKAA"
+        },
+        "Id": "0X9O30000004grtKAA",
+        "VersionNumber": 27,
+        "Status": "Inactive",
+        "DeveloperName": "v27"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004gqHKAQ"
+        },
+        "Id": "0X9O30000004gqHKAQ",
+        "VersionNumber": 26,
+        "Status": "Inactive",
+        "DeveloperName": "v26"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004gofKAA"
+        },
+        "Id": "0X9O30000004gofKAA",
+        "VersionNumber": 25,
+        "Status": "Inactive",
+        "DeveloperName": "v25"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004glRKAQ"
+        },
+        "Id": "0X9O30000004glRKAQ",
+        "VersionNumber": 24,
+        "Status": "Inactive",
+        "DeveloperName": "v24"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004gjpKAA"
+        },
+        "Id": "0X9O30000004gjpKAA",
+        "VersionNumber": 23,
+        "Status": "Inactive",
+        "DeveloperName": "v23"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004gezKAA"
+        },
+        "Id": "0X9O30000004gezKAA",
+        "VersionNumber": 22,
+        "Status": "Inactive",
+        "DeveloperName": "v22"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004ga9KAA"
+        },
+        "Id": "0X9O30000004ga9KAA",
+        "VersionNumber": 21,
+        "Status": "Inactive",
+        "DeveloperName": "v21"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004gYXKAY"
+        },
+        "Id": "0X9O30000004gYXKAY",
+        "VersionNumber": 20,
+        "Status": "Inactive",
+        "DeveloperName": "v20"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004gVJKAY"
+        },
+        "Id": "0X9O30000004gVJKAY",
+        "VersionNumber": 19,
+        "Status": "Inactive",
+        "DeveloperName": "v19"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004fFtKAI"
+        },
+        "Id": "0X9O30000004fFtKAI",
+        "VersionNumber": 18,
+        "Status": "Inactive",
+        "DeveloperName": "v18"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004ZX3KAM"
+        },
+        "Id": "0X9O30000004ZX3KAM",
+        "VersionNumber": 17,
+        "Status": "Inactive",
+        "DeveloperName": "v17"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004ZTpKAM"
+        },
+        "Id": "0X9O30000004ZTpKAM",
+        "VersionNumber": 16,
+        "Status": "Inactive",
+        "DeveloperName": "v16"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004UKTKA2"
+        },
+        "Id": "0X9O30000004UKTKA2",
+        "VersionNumber": 15,
+        "Status": "Inactive",
+        "DeveloperName": "v15"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004ToDKAU"
+        },
+        "Id": "0X9O30000004ToDKAU",
+        "VersionNumber": 12,
+        "Status": "Inactive",
+        "DeveloperName": "v12"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004ThlKAE"
+        },
+        "Id": "0X9O30000004ThlKAE",
+        "VersionNumber": 10,
+        "Status": "Inactive",
+        "DeveloperName": "v10"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004RJNKA2"
+        },
+        "Id": "0X9O30000004RJNKA2",
+        "VersionNumber": 2,
+        "Status": "Inactive",
+        "DeveloperName": "v2"
+      }
+    ],
+    "totalSize": 18,
+    "done": true
+  },
+  "warnings": []
+}

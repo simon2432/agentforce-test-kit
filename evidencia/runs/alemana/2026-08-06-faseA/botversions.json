@@ -1,0 +1,226 @@
+{
+  "status": 0,
+  "result": {
+    "records": [
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004h1ZKAQ"
+        },
+        "Id": "0X9O30000004h1ZKAQ",
+        "VersionNumber": 29,
+        "Status": "Active",
+        "DeveloperName": "v29",
+        "CreatedDate": "2026-07-31T12:41:48.000+0000",
+        "LastModifiedDate": "2026-07-31T12:42:01.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004gzxKAA"
+        },
+        "Id": "0X9O30000004gzxKAA",
+        "VersionNumber": 28,
+        "Status": "Inactive",
+        "DeveloperName": "v28",
+        "CreatedDate": "2026-07-31T12:18:43.000+0000",
+        "LastModifiedDate": "2026-07-31T12:42:01.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004grtKAA"
+        },
+        "Id": "0X9O30000004grtKAA",
+        "VersionNumber": 27,
+        "Status": "Inactive",
+        "DeveloperName": "v27",
+        "CreatedDate": "2026-07-31T05:04:55.000+0000",
+        "LastModifiedDate": "2026-07-31T12:18:55.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004gqHKAQ"
+        },
+        "Id": "0X9O30000004gqHKAQ",
+        "VersionNumber": 26,
+        "Status": "Inactive",
+        "DeveloperName": "v26",
+        "CreatedDate": "2026-07-31T04:47:24.000+0000",
+        "LastModifiedDate": "2026-07-31T04:47:30.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004gofKAA"
+        },
+        "Id": "0X9O30000004gofKAA",
+        "VersionNumber": 25,
+        "Status": "Inactive",
+        "DeveloperName": "v25",
+        "CreatedDate": "2026-07-31T04:12:32.000+0000",
+        "LastModifiedDate": "2026-07-31T05:05:06.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004glRKAQ"
+        },
+        "Id": "0X9O30000004glRKAQ",
+        "VersionNumber": 24,
+        "Status": "Inactive",
+        "DeveloperName": "v24",
+        "CreatedDate": "2026-07-31T03:47:42.000+0000",
+        "LastModifiedDate": "2026-07-31T04:14:15.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004gjpKAA"
+        },
+        "Id": "0X9O30000004gjpKAA",
+        "VersionNumber": 23,
+        "Status": "Inactive",
+        "DeveloperName": "v23",
+        "CreatedDate": "2026-07-31T03:25:02.000+0000",
+        "LastModifiedDate": "2026-07-31T03:47:54.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004gezKAA"
+        },
+        "Id": "0X9O30000004gezKAA",
+        "VersionNumber": 22,
+        "Status": "Inactive",
+        "DeveloperName": "v22",
+        "CreatedDate": "2026-07-31T02:16:08.000+0000",
+        "LastModifiedDate": "2026-07-31T02:37:18.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004ga9KAA"
+        },
+        "Id": "0X9O30000004ga9KAA",
+        "VersionNumber": 21,
+        "Status": "Inactive",
+        "DeveloperName": "v21",
+        "CreatedDate": "2026-07-30T23:45:01.000+0000",
+        "LastModifiedDate": "2026-07-31T02:16:52.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004gYXKAY"
+        },
+        "Id": "0X9O30000004gYXKAY",
+        "VersionNumber": 20,
+        "Status": "Inactive",
+        "DeveloperName": "v20",
+        "CreatedDate": "2026-07-30T23:31:02.000+0000",
+        "LastModifiedDate": "2026-07-30T23:56:26.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004gVJKAY"
+        },
+        "Id": "0X9O30000004gVJKAY",
+        "VersionNumber": 19,
+        "Status": "Inactive",
+        "DeveloperName": "v19",
+        "CreatedDate": "2026-07-30T22:58:28.000+0000",
+        "LastModifiedDate": "2026-07-30T23:34:14.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004fFtKAI"
+        },
+        "Id": "0X9O30000004fFtKAI",
+        "VersionNumber": 18,
+        "Status": "Inactive",
+        "DeveloperName": "v18",
+        "CreatedDate": "2026-07-30T05:04:08.000+0000",
+        "LastModifiedDate": "2026-07-31T03:25:13.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004ZX3KAM"
+        },
+        "Id": "0X9O30000004ZX3KAM",
+        "VersionNumber": 17,
+        "Status": "Inactive",
+        "DeveloperName": "v17",
+        "CreatedDate": "2026-07-24T05:18:39.000+0000",
+        "LastModifiedDate": "2026-07-30T05:04:25.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004ZTpKAM"
+        },
+        "Id": "0X9O30000004ZTpKAM",
+        "VersionNumber": 16,
+        "Status": "Inactive",
+        "DeveloperName": "v16",
+        "CreatedDate": "2026-07-24T04:06:46.000+0000",
+        "LastModifiedDate": "2026-07-24T05:18:57.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004UKTKA2"
+        },
+        "Id": "0X9O30000004UKTKA2",
+        "VersionNumber": 15,
+        "Status": "Inactive",
+        "DeveloperName": "v15",
+        "CreatedDate": "2026-07-19T14:33:43.000+0000",
+        "LastModifiedDate": "2026-07-24T04:07:14.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004ToDKAU"
+        },
+        "Id": "0X9O30000004ToDKAU",
+        "VersionNumber": 12,
+        "Status": "Inactive",
+        "DeveloperName": "v12",
+        "CreatedDate": "2026-07-17T20:48:46.000+0000",
+        "LastModifiedDate": "2026-07-17T21:41:11.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004ThlKAE"
+        },
+        "Id": "0X9O30000004ThlKAE",
+        "VersionNumber": 10,
+        "Status": "Inactive",
+        "DeveloperName": "v10",
+        "CreatedDate": "2026-07-17T19:27:46.000+0000",
+        "LastModifiedDate": "2026-07-17T20:37:50.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "BotVersion",
+          "url": "/services/data/v67.0/sobjects/BotVersion/0X9O30000004RJNKA2"
+        },
+        "Id": "0X9O30000004RJNKA2",
+        "VersionNumber": 2,
+        "Status": "Inactive",
+        "DeveloperName": "v2",
+        "CreatedDate": "2026-07-15T16:12:14.000+0000",
+        "LastModifiedDate": "2026-07-15T17:19:30.000+0000"
+      }
+    ],
+    "totalSize": 18,
+    "done": true
+  },
+  "warnings": []
+}

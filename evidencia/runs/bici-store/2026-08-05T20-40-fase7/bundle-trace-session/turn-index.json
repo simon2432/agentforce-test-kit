@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "sessionId": "01a62d12-71bf-404c-b39f-9008025fd27f",
+  "agentId": "Bici_Store",
+  "created": "2026-08-06T14:50:32.767Z",
+  "turns": [
+    {
+      "turn": 1,
+      "timestamp": "2026-08-06T14:50:32.767Z",
+      "role": "agent",
+      "summary": "Hola, soy el asistente de Bici Store. ¿En qué te puedo ayudar?",
+      "summaryTruncated": false,
+      "multiModal": null,
+      "traceFile": null,
+      "planId": null
+    },
+    {
+      "turn": 2,
+      "timestamp": "2026-08-06T14:50:46.925Z",
+      "role": "user",
+      "summary": "¿A qué hora abren?",
+      "summaryTruncated": false,
+      "multiModal": null,
+      "traceFile": null,
+      "planId": null
+    },
+    {
+      "turn": 3,
+      "timestamp": "2026-08-06T14:50:54.577Z",
+      "role": "agent",
+      "summary": "Abrimos de lunes a sábado de 9 a 19 horas. ¿Querés consultar algo más sobre nuestros servicios o pro...",
+      "summaryTruncated": true,
+      "multiModal": null,
+      "traceFile": "traces/f514947e-3000-4b8d-ba6c-f329a5c6e2ae.json",
+      "planId": "f514947e-3000-4b8d-ba6c-f329a5c6e2ae"
+    }
+  ]
+}

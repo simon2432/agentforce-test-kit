@@ -1,0 +1,17 @@
+# P12 (mitad verificable) — ¿run-eval ignora `metrics` en silencio?
+# Si las evaluara, aparecerian evaluadores de metrica en evaluations[].
+name: p12_metrics
+subjectType: AGENT
+subjectName: Bici_Store
+testCases:
+  - utterance: ¿A qué hora abren?
+    expectedTopic: Faq
+    metrics:
+      - coherence
+      - completeness
+  - utterance: ¿Cuál es la capital de Australia?
+    expectedTopic: OffTopic
+    expectedOutcome: El agente debe rechazar la consulta por estar fuera de alcance.
+    metrics:
+      - coherence
+      - completeness

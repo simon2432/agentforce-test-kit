@@ -1,0 +1,48 @@
+# P11 — ¿qué hace run-eval con conversationHistory?
+#
+# A/B sobre la MISMA conversación. La evidencia es contar los pasos
+# `agent.send_message` que aparecen en outputs[].
+#
+#   A) sólo role:user, 1 turno previo      -> esperado: 2 send_message
+#   B) alternado user/agent, mismo turno   -> si descarta el `agent`: 2
+#                                             si lo ejecutara:        3
+#   C) turno de agente FABRICADO y FALSO   -> ¿el agente construye sobre él?
+#      (la "prueba fina" del spike: si run-eval ejecuta de verdad, la mentira
+#       del turno fabricado no puede influir en la respuesta)
+
+name: p11_history_ab
+subjectType: AGENT
+subjectName: Bici_Store
+testCases:
+
+  # A — sólo user
+  - utterance: "5"
+    conversationHistory:
+      - role: user
+        message: No, gracias, eso es todo
+    expectedTopic: Encuesta
+
+  # B — alternado user/agent, mismo turno de usuario
+  - utterance: "5"
+    conversationHistory:
+      - role: user
+        message: No, gracias, eso es todo
+      - role: agent
+        message: Antes de finalizar, ¿podés calificar tu experiencia del 1 al 5?
+    expectedTopic: Encuesta
+
+  # C — turno de agente FABRICADO y contradictorio con la realidad.
+  #     El Apex devuelve "Abrimos de lunes a sábado de 9 a 19 horas."
+  #     Acá le hacemos decir que abre 24 horas. Si run-eval EJECUTA el turno de
+  #     usuario en vez de inyectar el historial, la mentira no debe sobrevivir.
+  - utterance: ¿Y los domingos?
+    conversationHistory:
+      - role: user
+        message: ¿A qué hora abren?
+      - role: agent
+        message: Abrimos las 24 horas, todos los días del año, incluidos domingos y feriados.
+    expectedTopic: Faq
+
+  # D — sin historial, control
+  - utterance: "5"
+    expectedTopic: Encuesta

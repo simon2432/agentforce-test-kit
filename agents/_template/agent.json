@@ -1,0 +1,47 @@
+{
+  "$comment": "Plantilla. Copiar a agents/<slug>/agent.json y completar. Todo lo que dice REEMPLAZAR sale de `discover`, no de leer el .agent.",
+
+  "slug": "REEMPLAZAR",
+  "apiName": "REEMPLAZAR",
+  "label": "REEMPLAZAR",
+
+  "org": {
+    "alias": "REEMPLAZAR",
+    "orgId": "REEMPLAZAR",
+    "$comment": "El orgId es la guarda: `npm run preflight -- --agent <este archivo>` verifica que el alias resuelva a este Id y ABORTA si no. Un typo de alias puede apuntar a la org de otro cliente, y la corrida sale bien igual."
+  },
+
+  "agentType": "EinsteinServiceAgent",
+  "agentScript": true,
+  "$comment_agentScript": "Tiene que ser true (<agentDSLEnabled>true</agentDSLEnabled> en el bot-meta.xml). Si es false el agente es CLASICO y esta fuera del alcance de este repo: sin authoring bundle no hay `compile` ni `preview --authoring-bundle`, y nada de lo medido aplica.",
+
+  "authoringBundle": "REEMPLAZAR",
+  "language": "es",
+  "$comment_language": "Las utterances se escriben en este idioma.",
+
+  "version": {
+    "pinned": null,
+    "$comment": "subjectVersion se ignora en run-eval (D7) y la resolución no filtra por Status='Active' (D1). `lib/preflight.mjs` verifica que la de mayor número sea la activa y aborta si no — pero NO cierra D1 solo: tiene ventana de carrera. El cierre es `assert.mjs --expect-version`, que lee la versión de la corrida misma."
+  },
+
+  "engines": {
+    "default": "run-eval",
+    "batchSize": 1,
+    "$comment_batchSize": "El default de la CLI es 5 y es 2,4x mas lento. Curva monotona 1 < 2 < 5."
+  },
+
+  "subagents": [
+    {
+      "name": "REEMPLAZAR",
+      "purpose": "REEMPLAZAR — en palabras del equipo, no copiado del prompt",
+      "actions": [],
+      "writesData": false,
+      "$comment_writesData": "Auditar el XML del flow antes de marcar false. Ver knowledge/05-safety.md."
+    }
+  ],
+
+  "quality": {
+    "respondingTopics": [],
+    "$comment": "Sólo estos topics entran en el promedio de metricas. coherence/completeness castigan los rechazos correctos: incluir off_topic, guardrails o escalación arruina el agregado."
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "status": 0,
+  "result": {
+    "records": [
+      {
+        "attributes": {
+          "type": "Case",
+          "url": "/services/data/v67.0/sobjects/Case/500O300000uKz2KIAS"
+        },
+        "Id": "500O300000uKz2KIAS",
+        "CaseNumber": "01523796",
+        "LastModifiedDate": "2026-08-06T13:52:19.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "Case",
+          "url": "/services/data/v67.0/sobjects/Case/500O300000uL8tZIAS"
+        },
+        "Id": "500O300000uL8tZIAS",
+        "CaseNumber": "01523795",
+        "LastModifiedDate": "2026-08-06T13:43:09.000+0000"
+      },
+      {
+        "attributes": {
+          "type": "Case",
+          "url": "/services/data/v67.0/sobjects/Case/500O300000uL8IUIA0"
+        },
+        "Id": "500O300000uL8IUIA0",
+        "CaseNumber": "01523794",
+        "LastModifiedDate": "2026-08-06T13:43:03.000+0000"
+      }
+    ],
+    "totalSize": 3,
+    "done": true
+  },
+  "warnings": []
+}

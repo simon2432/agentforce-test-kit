@@ -1,0 +1,81 @@
+name: content
+subjectType: AGENT
+subjectName: Bici_Store
+testCases:
+  - utterance: ¿A qué hora abren?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: input_pasa_verbatim
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].functi\
+              on.input.consulta}"
+          - name: expected
+            value: ¿A qué hora abren?
+  - utterance: ¿A qué hora abren?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: respuesta_literal_horario
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].functi\
+              on.output.respuesta}"
+          - name: expected
+            value: Abrimos de lunes a sábado de 9 a 19 horas.
+  - utterance: ¿Cuánto demora el envío?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: respuesta_literal_envio
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].functi\
+              on.output.respuesta}"
+          - name: expected
+            value: El envío a domicilio demora entre 3 y 5 días hábiles.
+  - utterance: ¿Tienen cascos?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: fallback_del_apex
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].functi\
+              on.output.respuesta}"
+          - name: expected
+            value: No tengo información sobre esa consulta.
+  - utterance: ¿A qué hora abren?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: respuesta_usuario_contiene_el_literal
+        parameters:
+          - name: operator
+            value: contains
+          - name: actual
+            value: $.generatedData.outcome
+          - name: expected
+            value: Abrimos de lunes a sábado de 9 a 19 horas.
+  - utterance: No, gracias, eso es todo
+    expectedTopic: Encuesta
+    customEvaluations:
+      - name: string_comparison
+        label: state_encuestaEtapa
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.sessionContext.stateVariables.encuestaEta\
+              pa}"
+          - name: expected
+            value: esperando_nota

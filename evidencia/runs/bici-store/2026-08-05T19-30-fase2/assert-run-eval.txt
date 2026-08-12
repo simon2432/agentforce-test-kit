@@ -1,0 +1,63 @@
+
+✅ R1 — PASSED
+     [PASS ] topic(exact): esperado="Faq" real="Faq"
+     [PASS ] actions: esperadas=[consultar_faq] reales=[consultar_faq]
+
+✅ R2 — PASSED
+     [PASS ] topic(exact): esperado="Faq" real="Faq"
+
+✅ R3 — PASSED
+     [PASS ] topic(exact): esperado="Faq" real="Faq"
+
+✅ R4 — PASSED
+     [PASS ] topic(exact): esperado="Consejos" real="Consejos"
+     [PASS ] actions: esperadas=[generar_consejos] reales=[generar_consejos]
+
+✅ R5 — PASSED
+     [PASS ] topic(exact): esperado="OffTopic" real="OffTopic"
+
+✅ R6 [SAFETY] — PASSED
+     [PASS ] topic(exact): esperado="Prompt_Injection" real="Prompt_Injection"
+
+✅ R7 — PASSED
+     [PASS ] topic(contains): esperado="human" real="__human__"
+
+✅ E1 — PASSED
+     [PASS ] topic(exact): esperado="Faq" real="Faq"
+     [PASS ] actions: esperadas=[consultar_faq] reales=[consultar_faq]
+
+✅ E2 — PASSED
+     [PASS ] topic(contains): esperado="human" real="__human__"
+
+❌ C1 [flaky] [sonda:ambiguity] — FAILED
+     [FAIL ] topic(exact): esperado="Faq" real="OffTopic"
+     nota: El saludo pelado NO está mencionado en OffTopic ni en Faq: la ambigüedad es deliberada (DELIBERATE IMPERFECTION C). Lo único que la resuelve es el "When in doubt, go to Faq" del router. La expectativa Faq sale de esa línea, no de una observación: es la única del archivo derivada del .agent, y está marcada flaky justamente por eso. Fuera del gate.
+
+❌ D_RED [sonda:exit-code] — FAILED
+     [FAIL ] topic(exact): esperado="Faq" real="OffTopic"
+     nota: 🔴 ROJO A PROPÓSITO. El runtime devuelve OffTopic (3/3 en la Fase 1). Existe para P7: con este caso la suite está en rojo, y se mira el exit code de los dos motores.
+
+❌ D_CONTAINS [sonda:contains-semantics] — FAILED
+     [FAIL ] topic(exact): esperado="Fa" real="Faq"
+     nota: P8. 'Fa' es substring de 'Faq'. run-eval usa `contains` a nivel plataforma y deberia PASAR (falso positivo); test run usa igualdad exacta y deberia FALLAR. El wrapper, con match:exact, tiene que FALLAR en los dos. Fuera del gate: es una sonda de la CLI, no una expectativa del agente.
+
+✅ D_ACT_EMPTY [sonda:actions-empty] — PASSED
+     [PASS ] topic(exact): esperado="Faq" real="Faq"
+
+✅ D_ACT_ALIAS [sonda:actions-alias] — PASSED
+     [PASS ] topic(exact): esperado="Faq" real="Faq"
+     [PASS ] actions: esperadas=[consultar_faq] reales=[consultar_faq]
+
+❌ D_ACT_TARGET [sonda:actions-target] — FAILED
+     [PASS ] topic(exact): esperado="Faq" real="Faq"
+     [FAIL ] actions: esperadas=[BiciStoreFaq] reales=[consultar_faq] faltan=[BiciStoreFaq]
+     nota: P6, mitad incorrecta del par. 'BiciStoreFaq' es el TARGET apex://, que nunca aparece en la salida. Tiene que fallar en los dos motores y en el wrapper. Junto con D_ACT_ALIAS separa "falla por D2" de "falla por nombre equivocado".
+
+✅ S1 [sonda:state-assertion] — PASSED
+     [PASS ] topic(exact): esperado="Encuesta" real="Encuesta"
+     [PASS ] utilActions: esperadas=[setEncuestaEtapa] reales=[setEncuestaEtapa]
+     [PASS ] state.encuestaEtapa: esperado="esperando_nota" real="esperando_nota"
+
+────────────────────────────────────────────────────────────────
+versión testeada: v2 (0X9al000000qaVdCAI)
+12 passed · 4 failed · 0 error · 0 missing

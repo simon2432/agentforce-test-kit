@@ -1,0 +1,12 @@
+{
+  "$comment": "FIXTURE generado por build.mjs. Sólo las CLAVES de topics, que es lo único que lee clasificar().",
+  "agent": "AGENTFORCE_Agent_Alemana_Go",
+  "botVersionId": "0X9O30000004h1ZKAQ",
+  "topics": {
+    "GeneralFAQ": {},
+    "SaveSurvey": {},
+    "off_topic": {},
+    "human": {},
+    "Prompt_Injection": {}
+  }
+}

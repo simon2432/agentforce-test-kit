@@ -1,0 +1,40 @@
+# Verificación empírica de la trampa leída en el código:
+# needsPlannerState() sólo agrega el paso `agent.get_state` si el `actual` es una
+# de las 4 rutas conocidas, o si el caso tiene expectedTopic / expectedActions.
+#
+# Este caso usa una ref CRUDA y NO tiene expectedTopic. Si la lectura del código
+# es correcta, el paso `gs` no se agrega y la ref no resuelve nada.
+#
+# Control: el caso 2 es idéntico pero CON expectedTopic. Debe pasar.
+
+name: fase3_trampa_get_state
+subjectType: AGENT
+subjectName: Bici_Store
+testCases:
+
+  # SIN expectedTopic — la ref cruda deberia quedar sin resolver
+  - utterance: ¿A qué hora abren?
+    customEvaluations:
+      - name: string_comparison
+        label: TRAP_sin_expectedTopic
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+          - name: expected
+            value: Abrimos de lunes a sábado de 9 a 19 horas.
+
+  # CON expectedTopic — control, deberia pasar
+  - utterance: ¿A qué hora abren?
+    expectedTopic: Faq
+    customEvaluations:
+      - name: string_comparison
+        label: CONTROL_con_expectedTopic
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+          - name: expected
+            value: Abrimos de lunes a sábado de 9 a 19 horas.

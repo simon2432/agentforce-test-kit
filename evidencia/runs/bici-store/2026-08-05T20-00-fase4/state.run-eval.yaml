@@ -1,0 +1,51 @@
+name: state
+subjectType: AGENT
+subjectName: Bici_Store
+testCases:
+  - utterance: ¿A qué hora abren?
+    expectedTopic: Faq
+    expectedActions:
+      - consultar_faq
+  - utterance: ¿A qué hora abren?
+    contextVariables:
+      - name: encuestaEtapa
+        value: esperando_nota
+    expectedTopic: Encuesta
+    customEvaluations:
+      - name: string_comparison
+        label: siembra_llega_al_runtime
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.sessionContext.stateVariables.encuestaEtapa}"
+          - name: expected
+            value: esperando_nota
+  - utterance: No, gracias, eso es todo
+    expectedTopic: Encuesta
+  - utterance: Quiero hablar con una persona
+    expectedTopic: human
+  - utterance: "5"
+    conversationHistory:
+      - role: user
+        message: No, gracias, eso es todo
+    expectedTopic: Encuesta
+    customEvaluations:
+      - name: string_comparison
+        label: etapa_avanzo_a_esperando_comentario
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.sessionContext.stateVariables.encuestaEtapa}"
+          - name: expected
+            value: esperando_comentario
+      - name: string_comparison
+        label: nota_almacenada
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.sessionContext.stateVariables.encuestaNota}"
+          - name: expected
+            value: "5"

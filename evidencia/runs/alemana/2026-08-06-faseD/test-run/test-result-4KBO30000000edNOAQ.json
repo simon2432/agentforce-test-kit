@@ -1,0 +1,299 @@
+{
+  "endTime": "2026-08-07T02:28:48Z",
+  "startTime": "2026-08-07T02:10:04Z",
+  "status": "COMPLETED",
+  "subjectName": "Kit_Alemana_DContext",
+  "testCases": [
+    {
+      "endTime": "2026-08-07T02:10:19Z",
+      "generatedData": {
+        "actionsSequence": "[&#39;AGENTFORCE_Answer_question_with_knowledge&#39;]",
+        "generatedResponse": "Por el momento no tengo esa información disponible en la base de conocimiento.\n\n¿Tienes alguna otra consulta?",
+        "invokedActions": "[[{\"function\":{\"name\":\"AGENTFORCE_Answer_question_with_knowledge\"}}]]",
+        "outcome": "Por el momento no tengo esa información disponible en la base de conocimiento.\n\n¿Tienes alguna otra consulta?",
+        "sessionId": "019fd9fc-1bb4-7202-a982-c692abee07c6",
+        "topic": "GeneralFAQ"
+      },
+      "inputs": {
+        "utterance": "¿Cuáles son los horarios de atención del servicio de urgencia?"
+      },
+      "startTime": "2026-08-07T02:10:04Z",
+      "status": "COMPLETED",
+      "testNumber": 1,
+      "testResults": [
+        {
+          "actualValue": "GeneralFAQ",
+          "endTime": "2026-08-07T02:10:20Z",
+          "errorCode": 0,
+          "expectedValue": "GeneralFAQ",
+          "metricLabel": "topic_assertion",
+          "name": "topic_assertion",
+          "result": "PASS",
+          "score": 1,
+          "startTime": "2026-08-07T02:10:05Z",
+          "status": "COMPLETED",
+          "metricExplainability": ""
+        },
+        {
+          "actualValue": "['AGENTFORCE_Answer_question_with_knowledge']",
+          "endTime": "2026-08-07T02:10:20Z",
+          "errorCode": 0,
+          "expectedValue": "[]",
+          "metricLabel": "actions_assertion",
+          "name": "actions_assertion",
+          "result": "PASS",
+          "score": 1,
+          "startTime": "2026-08-07T02:10:05Z",
+          "status": "COMPLETED",
+          "metricExplainability": ""
+        },
+        {
+          "actualValue": "Por el momento no tengo esa información disponible en la base de conocimiento.\n\n¿Tienes alguna otra consulta?",
+          "endTime": "2026-08-07T02:10:20Z",
+          "errorCode": 0,
+          "errorMessage": "Skip metric result due to missing expected input",
+          "metricLabel": "output_validation",
+          "name": "output_validation",
+          "result": "FAILURE",
+          "score": 0,
+          "startTime": "2026-08-07T02:10:05Z",
+          "status": "ERROR",
+          "expectedValue": "",
+          "metricExplainability": ""
+        }
+      ]
+    },
+    {
+      "endTime": "2026-08-07T02:10:21Z",
+      "generatedData": {
+        "actionsSequence": "[&#39;AGENTFORCE_Answer_question_with_knowledge&#39;]",
+        "generatedResponse": "Puedes consultar los distintos servicios de urgencia en nuestro sitio. Ofrecemos: Urgencia general, Urgencia escolar, Urgencia gineco-obstétrica, TeleUrgencia y RescateAlemana.\n\nEl horario de atención de TeleUrgencia es de lunes a viernes, de 08:00 a 23:00 horas. Para urgencias gineco-obstétricas, los horarios y la ubicación están disponibles en el sitio de urgencia gineco-obstétrica.\n\nSi tienes una urgencia médica, puedes reservar una hora en TeleUrgencia para recibir atención inmediata; durante la consulta el médico te indicará si debes acudir presencialmente al Servicio de Urgencia o al servicio de urgencia más cercano.\n\n¿Tienes alguna otra consulta?",
+        "invokedActions": "[[{\"function\":{\"name\":\"AGENTFORCE_Answer_question_with_knowledge\"}}]]",
+        "outcome": "Puedes consultar los distintos servicios de urgencia en nuestro sitio. Ofrecemos: Urgencia general, Urgencia escolar, Urgencia gineco-obstétrica, TeleUrgencia y RescateAlemana.\n\nEl horario de atención de TeleUrgencia es de lunes a viernes, de 08:00 a 23:00 horas. Para urgencias gineco-obstétricas, los horarios y la ubicación están disponibles en el sitio de urgencia gineco-obstétrica.\n\nSi tienes una urgencia médica, puedes reservar una hora en TeleUrgencia para recibir atención inmediata; durante la consulta el médico te indicará si debes acudir presencialmente al Servicio de Urgencia o al servicio de urgencia más cercano.\n\n¿Tienes alguna otra consulta?",
+        "sessionId": "019fd9fc-1bde-7d33-a6e6-4fba149f61f6",
+        "topic": "GeneralFAQ"
+      },
+      "inputs": {
+        "utterance": "¿Cuáles son los horarios de atención del servicio de urgencia?"
+      },
+      "startTime": "2026-08-07T02:10:04Z",
+      "status": "COMPLETED",
+      "testNumber": 2,
+      "testResults": [
+        {
+          "actualValue": "GeneralFAQ",
+          "endTime": "2026-08-07T02:10:22Z",
+          "errorCode": 0,
+          "expectedValue": "GeneralFAQ",
+          "metricLabel": "topic_assertion",
+          "name": "topic_assertion",
+          "result": "PASS",
+          "score": 1,
+          "startTime": "2026-08-07T02:10:05Z",
+          "status": "COMPLETED",
+          "metricExplainability": ""
+        },
+        {
+          "actualValue": "['AGENTFORCE_Answer_question_with_knowledge']",
+          "endTime": "2026-08-07T02:10:22Z",
+          "errorCode": 0,
+          "expectedValue": "[]",
+          "metricLabel": "actions_assertion",
+          "name": "actions_assertion",
+          "result": "PASS",
+          "score": 1,
+          "startTime": "2026-08-07T02:10:05Z",
+          "status": "COMPLETED",
+          "metricExplainability": ""
+        },
+        {
+          "actualValue": "Puedes consultar los distintos servicios de urgencia en nuestro sitio. Ofrecemos: Urgencia general, Urgencia escolar, Urgencia gineco-obstétrica, TeleUrgencia y RescateAlemana.\n\nEl horario de atención de TeleUrgencia es de lunes a viernes, de 08:00 a 23:00 horas. Para urgencias gineco-obstétricas, los horarios y la ubicación están disponibles en el sitio de urgencia gineco-obstétrica.\n\nSi tienes una urgencia médica, puedes reservar una hora en TeleUrgencia para recibir atención inmediata; durante la consulta el médico te indicará si debes acudir presencialmente al Servicio de Urgencia o al servicio de urgencia más cercano.\n\n¿Tienes alguna otra consulta?",
+          "endTime": "2026-08-07T02:10:22Z",
+          "errorCode": 0,
+          "errorMessage": "Skip metric result due to missing expected input",
+          "metricLabel": "output_validation",
+          "name": "output_validation",
+          "result": "FAILURE",
+          "score": 0,
+          "startTime": "2026-08-07T02:10:05Z",
+          "status": "ERROR",
+          "expectedValue": "",
+          "metricExplainability": ""
+        }
+      ]
+    },
+    {
+      "endTime": "2026-08-07T02:10:21Z",
+      "generatedData": {
+        "actionsSequence": "[&#39;AGENTFORCE_Answer_question_with_knowledge&#39;]",
+        "generatedResponse": "La Clínica Alemana ofrece varios servicios de urgencia. Puedes acceder a TeleUrgencia, disponible de lunes a viernes de 08:00 a 23:00 horas. Además, contamos con Urgencia general, Urgencia escolar, Urgencia gineco-obstétrica y RescateAlemana. Para revisar los horarios y ubicaciones específicas del Servicio de Urgencia y de la Urgencia gineco-obstétrica, te recomiendo consultar el sitio web de Clínica Alemana en la sección correspondiente a cada servicio.\n\n¿Tienes alguna otra consulta?",
+        "invokedActions": "[[{\"function\":{\"name\":\"AGENTFORCE_Answer_question_with_knowledge\"}}]]",
+        "outcome": "La Clínica Alemana ofrece varios servicios de urgencia. Puedes acceder a TeleUrgencia, disponible de lunes a viernes de 08:00 a 23:00 horas. Además, contamos con Urgencia general, Urgencia escolar, Urgencia gineco-obstétrica y RescateAlemana. Para revisar los horarios y ubicaciones específicas del Servicio de Urgencia y de la Urgencia gineco-obstétrica, te recomiendo consultar el sitio web de Clínica Alemana en la sección correspondiente a cada servicio.\n\n¿Tienes alguna otra consulta?",
+        "sessionId": "019fd9fc-1b87-7c5d-a14a-f8ad974cde34",
+        "topic": "GeneralFAQ"
+      },
+      "inputs": {
+        "utterance": "¿Cuáles son los horarios de atención del servicio de urgencia?"
+      },
+      "startTime": "2026-08-07T02:10:04Z",
+      "status": "COMPLETED",
+      "testNumber": 3,
+      "testResults": [
+        {
+          "actualValue": "GeneralFAQ",
+          "endTime": "2026-08-07T02:10:22Z",
+          "errorCode": 0,
+          "expectedValue": "GeneralFAQ",
+          "metricLabel": "topic_assertion",
+          "name": "topic_assertion",
+          "result": "PASS",
+          "score": 1,
+          "startTime": "2026-08-07T02:10:05Z",
+          "status": "COMPLETED",
+          "metricExplainability": ""
+        },
+        {
+          "actualValue": "['AGENTFORCE_Answer_question_with_knowledge']",
+          "endTime": "2026-08-07T02:10:22Z",
+          "errorCode": 0,
+          "expectedValue": "[]",
+          "metricLabel": "actions_assertion",
+          "name": "actions_assertion",
+          "result": "PASS",
+          "score": 1,
+          "startTime": "2026-08-07T02:10:05Z",
+          "status": "COMPLETED",
+          "metricExplainability": ""
+        },
+        {
+          "actualValue": "La Clínica Alemana ofrece varios servicios de urgencia. Puedes acceder a TeleUrgencia, disponible de lunes a viernes de 08:00 a 23:00 horas. Además, contamos con Urgencia general, Urgencia escolar, Urgencia gineco-obstétrica y RescateAlemana. Para revisar los horarios y ubicaciones específicas del Servicio de Urgencia y de la Urgencia gineco-obstétrica, te recomiendo consultar el sitio web de Clínica Alemana en la sección correspondiente a cada servicio.\n\n¿Tienes alguna otra consulta?",
+          "endTime": "2026-08-07T02:10:22Z",
+          "errorCode": 0,
+          "errorMessage": "Skip metric result due to missing expected input",
+          "metricLabel": "output_validation",
+          "name": "output_validation",
+          "result": "FAILURE",
+          "score": 0,
+          "startTime": "2026-08-07T02:10:05Z",
+          "status": "ERROR",
+          "expectedValue": "",
+          "metricExplainability": ""
+        }
+      ]
+    },
+    {
+      "endTime": "2026-08-07T02:28:46Z",
+      "errorMessage": "Agent call failed",
+      "generatedData": {
+        "invokedActions": ""
+      },
+      "inputs": {
+        "utterance": "¿Cuáles son los horarios de atención del servicio de urgencia?"
+      },
+      "startTime": "2026-08-07T02:10:04Z",
+      "status": "ERROR",
+      "testNumber": 4,
+      "testResults": [
+        {
+          "endTime": "2026-08-07T02:28:47Z",
+          "errorCode": 0,
+          "errorMessage": "Agent call failed",
+          "expectedValue": "GeneralFAQ",
+          "metricLabel": "topic_assertion",
+          "name": "topic_assertion",
+          "result": "FAILURE",
+          "score": 0,
+          "startTime": "2026-08-07T02:28:43Z",
+          "status": "ERROR",
+          "actualValue": "",
+          "metricExplainability": ""
+        },
+        {
+          "endTime": "2026-08-07T02:28:47Z",
+          "errorCode": 0,
+          "errorMessage": "Agent call failed",
+          "expectedValue": "[]",
+          "metricLabel": "actions_assertion",
+          "name": "actions_assertion",
+          "result": "FAILURE",
+          "score": 0,
+          "startTime": "2026-08-07T02:28:43Z",
+          "status": "ERROR",
+          "actualValue": "",
+          "metricExplainability": ""
+        },
+        {
+          "endTime": "2026-08-07T02:28:47Z",
+          "errorCode": 0,
+          "errorMessage": "Agent call failed",
+          "metricLabel": "output_validation",
+          "name": "output_validation",
+          "result": "FAILURE",
+          "score": 0,
+          "startTime": "2026-08-07T02:28:43Z",
+          "status": "ERROR",
+          "actualValue": "",
+          "expectedValue": "",
+          "metricExplainability": ""
+        }
+      ]
+    },
+    {
+      "endTime": "2026-08-07T02:28:46Z",
+      "errorMessage": "Agent call failed",
+      "generatedData": {
+        "invokedActions": ""
+      },
+      "inputs": {
+        "utterance": "¿Cuáles son los horarios de atención del servicio de urgencia?"
+      },
+      "startTime": "2026-08-07T02:10:04Z",
+      "status": "ERROR",
+      "testNumber": 5,
+      "testResults": [
+        {
+          "endTime": "2026-08-07T02:28:47Z",
+          "errorCode": 0,
+          "errorMessage": "Agent call failed",
+          "expectedValue": "GeneralFAQ",
+          "metricLabel": "topic_assertion",
+          "name": "topic_assertion",
+          "result": "FAILURE",
+          "score": 0,
+          "startTime": "2026-08-07T02:28:43Z",
+          "status": "ERROR",
+          "actualValue": "",
+          "metricExplainability": ""
+        },
+        {
+          "endTime": "2026-08-07T02:28:48Z",
+          "errorCode": 0,
+          "errorMessage": "Agent call failed",
+          "expectedValue": "[]",
+          "metricLabel": "actions_assertion",
+          "name": "actions_assertion",
+          "result": "FAILURE",
+          "score": 0,
+          "startTime": "2026-08-07T02:28:43Z",
+          "status": "ERROR",
+          "actualValue": "",
+          "metricExplainability": ""
+        },
+        {
+          "endTime": "2026-08-07T02:28:48Z",
+          "errorCode": 0,
+          "errorMessage": "Agent call failed",
+          "metricLabel": "output_validation",
+          "name": "output_validation",
+          "result": "FAILURE",
+          "score": 0,
+          "startTime": "2026-08-07T02:28:43Z",
+          "status": "ERROR",
+          "actualValue": "",
+          "expectedValue": "",
+          "metricExplainability": ""
+        }
+      ]
+    }
+  ]
+}

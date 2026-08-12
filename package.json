@@ -1,0 +1,20 @@
+{
+  "name": "agentforce-test-kit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Testing de agentes Agentforce. El valor est\u00e1 en knowledge/; lib/ son las utilidades que rodean los 23 defectos medidos.",
+  "scripts": {
+    "test": "node --test \"tests/**/*.test.mjs\"",
+    "doctor": "node lib/doctor.mjs",
+    "preflight": "node lib/preflight.mjs",
+    "gen": "node lib/gen-spec.mjs",
+    "extract": "node lib/extract.mjs",
+    "assert": "node lib/assert.mjs",
+    "report": "node lib/report.mjs",
+    "fixtures": "node tests/fixtures/build.mjs"
+  },
+  "dependencies": {
+    "yaml": "^2.8.1"
+  }
+}

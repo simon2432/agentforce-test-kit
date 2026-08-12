@@ -1,0 +1,301 @@
+{
+  "status": 0,
+  "result": {
+    "endTime": "2026-08-07T01:29:46Z",
+    "startTime": "2026-08-07T01:29:27Z",
+    "status": "COMPLETED",
+    "subjectName": "Kit_Alemana_C1Refs",
+    "testCases": [
+      {
+        "endTime": "2026-08-07T01:29:41Z",
+        "generatedData": {
+          "actionsSequence": "[&#39;AGENTFORCE_Business_Hours_Verifier&#39;]",
+          "generatedResponse": "User requested escalation to human.",
+          "invokedActions": "[[{\"function\":{\"name\":\"AGENTFORCE_Business_Hours_Verifier\"}}]]",
+          "outcome": "User requested escalation to human.",
+          "sessionId": "019fd9d6-f5e9-7ea7-95e0-8f3476d0112d",
+          "topic": "human"
+        },
+        "inputs": {
+          "utterance": "Necesito hablar con un ejecutivo, por favor"
+        },
+        "startTime": "2026-08-07T01:29:27Z",
+        "status": "COMPLETED",
+        "testNumber": 1,
+        "testResults": [
+          {
+            "actualValue": "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.__action_execution_status__}",
+            "endTime": "2026-08-07T01:29:42Z",
+            "errorCode": 0,
+            "expectedValue": "success",
+            "metricLabel": "string_comparison",
+            "name": "string_comparison",
+            "result": "FAILURE",
+            "score": 0,
+            "startTime": "2026-08-07T01:29:30Z",
+            "status": "COMPLETED",
+            "metricExplainability": ""
+          },
+          {
+            "actualValue": "human",
+            "endTime": "2026-08-07T01:29:42Z",
+            "errorCode": 0,
+            "expectedValue": "human",
+            "metricLabel": "topic_assertion",
+            "name": "topic_assertion",
+            "result": "PASS",
+            "score": 1,
+            "startTime": "2026-08-07T01:29:30Z",
+            "status": "COMPLETED",
+            "metricExplainability": ""
+          },
+          {
+            "actualValue": "['AGENTFORCE_Business_Hours_Verifier']",
+            "endTime": "2026-08-07T01:29:42Z",
+            "errorCode": 0,
+            "expectedValue": "[]",
+            "metricLabel": "actions_assertion",
+            "name": "actions_assertion",
+            "result": "PASS",
+            "score": 1,
+            "startTime": "2026-08-07T01:29:30Z",
+            "status": "COMPLETED",
+            "metricExplainability": ""
+          },
+          {
+            "actualValue": "User requested escalation to human.",
+            "endTime": "2026-08-07T01:29:42Z",
+            "errorCode": 0,
+            "errorMessage": "Skip metric result due to missing expected input",
+            "metricLabel": "output_validation",
+            "name": "output_validation",
+            "result": "FAILURE",
+            "score": 0,
+            "startTime": "2026-08-07T01:29:30Z",
+            "status": "ERROR",
+            "expectedValue": "",
+            "metricExplainability": ""
+          }
+        ]
+      },
+      {
+        "endTime": "2026-08-07T01:29:41Z",
+        "generatedData": {
+          "actionsSequence": "[&#39;AGENTFORCE_Business_Hours_Verifier&#39;]",
+          "generatedResponse": "User requested escalation to human.",
+          "invokedActions": "[[{\"function\":{\"name\":\"AGENTFORCE_Business_Hours_Verifier\"}}]]",
+          "outcome": "User requested escalation to human.",
+          "sessionId": "019fd9d6-f5b9-716b-b3f4-c07487f1a391",
+          "topic": "human"
+        },
+        "inputs": {
+          "utterance": "Necesito hablar con un ejecutivo, por favor"
+        },
+        "startTime": "2026-08-07T01:29:27Z",
+        "status": "COMPLETED",
+        "testNumber": 2,
+        "testResults": [
+          {
+            "actualValue": "{gs.response.planner_response.sessionContext.stateVariables.__ESTA_VARIABLE_NO_EXISTE__}",
+            "endTime": "2026-08-07T01:29:42Z",
+            "errorCode": 0,
+            "expectedValue": "nada",
+            "metricLabel": "string_comparison",
+            "name": "string_comparison",
+            "result": "FAILURE",
+            "score": 0,
+            "startTime": "2026-08-07T01:29:30Z",
+            "status": "COMPLETED",
+            "metricExplainability": ""
+          },
+          {
+            "actualValue": "human",
+            "endTime": "2026-08-07T01:29:42Z",
+            "errorCode": 0,
+            "expectedValue": "human",
+            "metricLabel": "topic_assertion",
+            "name": "topic_assertion",
+            "result": "PASS",
+            "score": 1,
+            "startTime": "2026-08-07T01:29:30Z",
+            "status": "COMPLETED",
+            "metricExplainability": ""
+          },
+          {
+            "actualValue": "['AGENTFORCE_Business_Hours_Verifier']",
+            "endTime": "2026-08-07T01:29:43Z",
+            "errorCode": 0,
+            "expectedValue": "[]",
+            "metricLabel": "actions_assertion",
+            "name": "actions_assertion",
+            "result": "PASS",
+            "score": 1,
+            "startTime": "2026-08-07T01:29:30Z",
+            "status": "COMPLETED",
+            "metricExplainability": ""
+          },
+          {
+            "actualValue": "User requested escalation to human.",
+            "endTime": "2026-08-07T01:29:43Z",
+            "errorCode": 0,
+            "errorMessage": "Skip metric result due to missing expected input",
+            "metricLabel": "output_validation",
+            "name": "output_validation",
+            "result": "FAILURE",
+            "score": 0,
+            "startTime": "2026-08-07T01:29:30Z",
+            "status": "ERROR",
+            "expectedValue": "",
+            "metricExplainability": ""
+          }
+        ]
+      },
+      {
+        "endTime": "2026-08-07T01:29:41Z",
+        "generatedData": {
+          "actionsSequence": "[&#39;AGENTFORCE_Business_Hours_Verifier&#39;]",
+          "generatedResponse": "User requested escalation to human.",
+          "invokedActions": "[[{\"function\":{\"name\":\"AGENTFORCE_Business_Hours_Verifier\"}}]]",
+          "outcome": "User requested escalation to human.",
+          "sessionId": "019fd9d6-f60b-7078-9e1d-89a8f78df97e",
+          "topic": "human"
+        },
+        "inputs": {
+          "utterance": "Necesito hablar con un ejecutivo, por favor"
+        },
+        "startTime": "2026-08-07T01:29:27Z",
+        "status": "COMPLETED",
+        "testNumber": 3,
+        "testResults": [
+          {
+            "actualValue": "{gs.response.planner_response.sessionContext.stateVariables.escalationStage}",
+            "endTime": "2026-08-07T01:29:42Z",
+            "errorCode": 0,
+            "expectedValue": "transferring",
+            "metricLabel": "string_comparison",
+            "name": "string_comparison",
+            "result": "FAILURE",
+            "score": 0,
+            "startTime": "2026-08-07T01:29:30Z",
+            "status": "COMPLETED",
+            "metricExplainability": ""
+          },
+          {
+            "actualValue": "human",
+            "endTime": "2026-08-07T01:29:42Z",
+            "errorCode": 0,
+            "metricLabel": "topic_assertion",
+            "name": "topic_assertion",
+            "result": "FAILURE",
+            "score": 0,
+            "startTime": "2026-08-07T01:29:30Z",
+            "status": "COMPLETED",
+            "expectedValue": "",
+            "metricExplainability": ""
+          },
+          {
+            "actualValue": "['AGENTFORCE_Business_Hours_Verifier']",
+            "endTime": "2026-08-07T01:29:42Z",
+            "errorCode": 0,
+            "expectedValue": "[]",
+            "metricLabel": "actions_assertion",
+            "name": "actions_assertion",
+            "result": "PASS",
+            "score": 1,
+            "startTime": "2026-08-07T01:29:30Z",
+            "status": "COMPLETED",
+            "metricExplainability": ""
+          },
+          {
+            "actualValue": "User requested escalation to human.",
+            "endTime": "2026-08-07T01:29:42Z",
+            "errorCode": 0,
+            "errorMessage": "Skip metric result due to missing expected input",
+            "metricLabel": "output_validation",
+            "name": "output_validation",
+            "result": "FAILURE",
+            "score": 0,
+            "startTime": "2026-08-07T01:29:30Z",
+            "status": "ERROR",
+            "expectedValue": "",
+            "metricExplainability": ""
+          }
+        ]
+      },
+      {
+        "endTime": "2026-08-07T01:29:45Z",
+        "generatedData": {
+          "actionsSequence": "[&#39;AGENTFORCE_Answer_question_with_knowledge&#39;]",
+          "generatedResponse": "Puedes reservar una hora en nuestro servicio de TeleUrgencia, disponible de lunes a viernes de 08:00 a 23:00 horas. Durante la consulta, un médico de urgencias te indicará si es necesario acudir de forma presencial al Servicio de Urgencia. Según tus síntomas, podrías necesitar acudir al servicio de urgencia más cercano.\n\nSi necesitas información sobre otros servicios de urgencia específicos (general, escolar, gineco-obstétrica, RescateAlemana, etc.), puedo ayudarte a buscar los horarios correspondientes.\n\n¿Tienes alguna otra consulta?",
+          "invokedActions": "[[{\"function\":{\"name\":\"AGENTFORCE_Answer_question_with_knowledge\"}}]]",
+          "outcome": "Puedes reservar una hora en nuestro servicio de TeleUrgencia, disponible de lunes a viernes de 08:00 a 23:00 horas. Durante la consulta, un médico de urgencias te indicará si es necesario acudir de forma presencial al Servicio de Urgencia. Según tus síntomas, podrías necesitar acudir al servicio de urgencia más cercano.\n\nSi necesitas información sobre otros servicios de urgencia específicos (general, escolar, gineco-obstétrica, RescateAlemana, etc.), puedo ayudarte a buscar los horarios correspondientes.\n\n¿Tienes alguna otra consulta?",
+          "sessionId": "019fd9d6-f5fd-7f0c-b548-bab2bc2c367d",
+          "topic": "GeneralFAQ"
+        },
+        "inputs": {
+          "utterance": "¿Cuáles son los horarios de atención del servicio de urgencia?"
+        },
+        "startTime": "2026-08-07T01:29:27Z",
+        "status": "COMPLETED",
+        "testNumber": 4,
+        "testResults": [
+          {
+            "actualValue": "{gs.response.planner_response.sessionContext.stateVariables.surveyStage}",
+            "endTime": "2026-08-07T01:29:46Z",
+            "errorCode": 0,
+            "expectedValue": "not_started",
+            "metricLabel": "string_comparison",
+            "name": "string_comparison",
+            "result": "FAILURE",
+            "score": 0,
+            "startTime": "2026-08-07T01:29:30Z",
+            "status": "COMPLETED",
+            "metricExplainability": ""
+          },
+          {
+            "actualValue": "GeneralFAQ",
+            "endTime": "2026-08-07T01:29:46Z",
+            "errorCode": 0,
+            "expectedValue": "GeneralFAQ",
+            "metricLabel": "topic_assertion",
+            "name": "topic_assertion",
+            "result": "PASS",
+            "score": 1,
+            "startTime": "2026-08-07T01:29:30Z",
+            "status": "COMPLETED",
+            "metricExplainability": ""
+          },
+          {
+            "actualValue": "['AGENTFORCE_Answer_question_with_knowledge']",
+            "endTime": "2026-08-07T01:29:46Z",
+            "errorCode": 0,
+            "expectedValue": "[]",
+            "metricLabel": "actions_assertion",
+            "name": "actions_assertion",
+            "result": "PASS",
+            "score": 1,
+            "startTime": "2026-08-07T01:29:30Z",
+            "status": "COMPLETED",
+            "metricExplainability": ""
+          },
+          {
+            "actualValue": "Puedes reservar una hora en nuestro servicio de TeleUrgencia, disponible de lunes a viernes de 08:00 a 23:00 horas. Durante la consulta, un médico de urgencias te indicará si es necesario acudir de forma presencial al Servicio de Urgencia. Según tus síntomas, podrías necesitar acudir al servicio de urgencia más cercano.\n\nSi necesitas información sobre otros servicios de urgencia específicos (general, escolar, gineco-obstétrica, RescateAlemana, etc.), puedo ayudarte a buscar los horarios correspondientes.\n\n¿Tienes alguna otra consulta?",
+            "endTime": "2026-08-07T01:29:46Z",
+            "errorCode": 0,
+            "errorMessage": "Skip metric result due to missing expected input",
+            "metricLabel": "output_validation",
+            "name": "output_validation",
+            "result": "FAILURE",
+            "score": 0,
+            "startTime": "2026-08-07T01:29:30Z",
+            "status": "ERROR",
+            "expectedValue": "",
+            "metricExplainability": ""
+          }
+        ]
+      }
+    ],
+    "runId": "4KBO30000000eYXOAY"
+  },
+  "warnings": []
+}
