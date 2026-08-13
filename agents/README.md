@@ -8,13 +8,85 @@ agents/
   mi-agente/
     agent.json        ← el registro: org, tipo, subagentes, qué toca datos
     vocabulary.json   ← los destinos REALES. Se genera, no se escribe
+    BITACORA.md       ← el rastro de auditoría. Append-only, se genera
     suites/
       descubrimiento.cases.yaml
       ruteo.cases.yaml
       contenido.cases.yaml
+    runs/
+      2026-08-12-1430-descubrimiento/
+      2026-08-12-1505-ruteo/         ← una carpeta por corrida, TODO adentro
 ```
 
 El paso a paso está en [`EMPEZAR-ACA.md`](../EMPEZAR-ACA.md), minuto 5.
+
+---
+
+## Una carpeta por corrida, y la bitácora
+
+**Regla:** cada corrida contra una org va en su propia carpeta, dentro del
+agente, con nombre `<YYYY-MM-DD-HHmm>-<proposito>`. Nunca en la raíz, nunca
+mezclando dos agentes, nunca reusando una carpeta.
+
+Adentro va todo lo de esa corrida:
+
+| | |
+|---|---|
+| `spec.yaml` | lo que se le mandó al motor |
+| `raw.json` | lo que devolvió, sin tocar |
+| `informe.md` | el informe curado (`lib/report.mjs`) |
+| `RESUMEN.md` | **qué se testeó y qué dio, caso por caso** — se genera |
+| `manifiesto.json` | el sha256 de cada archivo — se genera |
+
+### Registrar la corrida
+
+```powershell
+npm run bitacora -- --registrar --run agents\<slug>\runs\<carpeta> `
+  --suite agents\<slug>\suites\<x>.cases.yaml `
+  --proposito "batería de ruteo" --nota "qué decidiste y por qué"
+```
+
+Escribe `RESUMEN.md`, `manifiesto.json`, y agrega la entrada a `BITACORA.md`.
+
+### Las dos capas, y por qué están separadas
+
+La bitácora tiene **capa derivada** y **capa narrada**, marcadas como tales.
+
+🚨 **Un log que el ejecutor escribe sobre sí mismo es la evidencia más débil del
+repo, y por su ubicación se lee como la más fuerte.** Si quien corrió se saltea
+un paso o se equivoca, la narración va a salir igual de convincente.
+
+Por eso la capa derivada la calcula el script leyendo cosas que existen aparte:
+la versión del agente sale del crudo (la emite la plataforma, no nosotros), los
+veredictos se **recalculan** en vez de copiarse, y cada artefacto lleva su hash.
+Eso no se puede falsear sin falsear los artefactos.
+
+La capa narrada vale lo que valga la palabra de quien la escribió, y lo dice.
+
+### El control
+
+```powershell
+npm run bitacora -- --verificar --agente agents\<slug>
+```
+
+Detecta tres cosas, las tres mecánicas:
+
+- un artefacto **alterado o borrado** después de registrarse
+- una corrida **que nunca se registró**
+- una entrada **borrada** de la bitácora
+
+La segunda es la que más importa: es el único control contra el olvido. Una
+regla escrita se puede incumplir sin que se note; una corrida sin entrada, no.
+
+### Qué se versiona
+
+Los **crudos no** — traen las conversaciones enteras, que en un agente de cliente
+es dato sensible, y en git es para siempre. Sí se versionan `BITACORA.md`,
+`RESUMEN.md`, `manifiesto.json`, `informe.md` y `spec.yaml`.
+
+⚠️ **Consecuencia, dicha de frente:** quien clone el repo puede comprobar la
+**consistencia** de la cadena, no re-derivarla. Para re-derivar hace falta el
+crudo, que queda en la máquina de quien corrió.
 
 ---
 

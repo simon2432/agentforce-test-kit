@@ -149,6 +149,62 @@ obvia** (D23): verificar código sobre la equivocada da la respuesta equivocada.
 📌 Y la CLI **se auto-actualiza sola, incluso a mitad de sesión** (D22). Registrar
 la versión en cada corrida y re-verificar los anclajes al cerrar.
 
+---
+
+# PASO FINAL — dónde va la corrida y cómo se registra
+
+**No va al final por ser menos importante: va al final porque se hace al final,
+cada vez.**
+
+## Una carpeta por corrida, dentro del agente
+
+```
+agents/<slug>/runs/<YYYY-MM-DD-HHmm>-<proposito>/
+    spec.yaml  raw.json  informe.md  RESUMEN.md  manifiesto.json
+```
+
+Nunca en la raíz del repo. Nunca mezclando dos agentes. Nunca reusando una
+carpeta: si re-corrés, es una carpeta nueva.
+
+## Registrar ANTES de reportarle nada al usuario
+
+```bash
+npm run bitacora -- --registrar --run <carpeta> --suite <cases.yaml> \
+  --proposito "<qué se probó>" --nota "<qué decidiste y por qué>"
+```
+
+Escribe `RESUMEN.md` (qué se testeó y qué dio, caso por caso, **con una columna
+para lo que NO se verificó**), `manifiesto.json` (sha256 de cada artefacto), y
+agrega la entrada a `agents/<slug>/BITACORA.md`.
+
+## 🚨 Sobre tu nota — leé esto antes de escribirla
+
+Tu nota va a la **capa narrada**, marcada como auto-reportada, y **no es
+evidencia**. La capa derivada —versión del agente, veredictos, duraciones,
+hashes— la calcula el script leyendo los artefactos, y si tu nota la contradice,
+**gana el script**.
+
+Entonces la nota no sirve para repetir los números. Sirve para lo que el script
+no puede saber:
+
+- qué decidiste y por qué (qué utterance elegiste, qué topic esperabas)
+- **qué descartaste** y con qué criterio
+- **qué te salió mal**, qué reintentaste, qué no entendiste
+
+Una nota que sólo dice *"corrió bien, 12 de 12"* es peor que ninguna: ocupa el
+lugar de la información útil y le da tono de conclusión a algo que ya está
+derivado más arriba.
+
+## Al cerrar la sesión
+
+```bash
+npm run bitacora -- --verificar --agente agents/<slug>
+```
+
+Detecta corridas sin registrar, entradas borradas y artefactos alterados.
+**Es el control contra tu propio olvido:** esta instrucción se puede incumplir
+sin que se note; una corrida sin entrada, no.
+
 # ADLC Test
 
 Automated testing for Agentforce agents with smoke tests, batch execution, and iterative fix loops.

@@ -9,7 +9,7 @@ Para usar el repo no hace falta leer esto. Es para quien lo vaya a **continuar**
 ## Estado
 
 **El repo está en un estado usable.** Las tres rondas están destiladas en
-`knowledge/`, las utilidades tienen 91 tests propios, y la documentación está
+`knowledge/`, las utilidades tienen 110 tests propios, y la documentación está
 partida en cuatro entradas según para qué venís (`README`, `EMPEZAR-ACA`,
 `LIMITES`, `TIPOS-DE-PRUEBA`).
 

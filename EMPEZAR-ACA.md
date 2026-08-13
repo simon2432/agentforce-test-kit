@@ -46,7 +46,7 @@ La CLI se auto-actualiza sola, incluso a mitad de sesión. Un resultado sin esa
 versión anotada no es auditable.
 
 ```powershell
-npm test    # 91 tests de las utilidades. Deberían pasar todos
+npm test    # 110 tests de las utilidades. Deberían pasar todos
 ```
 
 ---
@@ -170,29 +170,37 @@ invocaron acciones reales, los 20 dieron verde. **No lo cuentes como cobertura.*
 
 ## Minuto 25 — Correr, verificar, informar
 
+🚨 **Una carpeta por corrida, dentro del agente, con todo adentro.** Nunca en la
+raíz, nunca mezclando dos agentes, nunca reusando una carpeta.
+
 ```powershell
-$ts = Get-Date -Format "yyyyMMdd-HHmmss"
-mkdir runs\$ts
+$R = "agents\<slug>\runs\$(Get-Date -Format 'yyyy-MM-dd-HHmm')-ruteo"
+mkdir $R
 
 # 1. Generar el spec
 node lib/gen-spec.mjs --suite agents\<slug>\suites\ruteo.cases.yaml `
-  --agent <ApiName> --engine run-eval --out runs\$ts\spec.yaml
+  --agent <ApiName> --engine run-eval --out $R\spec.yaml
 
 # 2. Correr — archivar SIEMPRE. El motor es efímero: si no capturás
 #    la salida, la corrida se pierde para siempre
-sf agent test run-eval --spec runs\$ts\spec.yaml --target-org <alias> `
-  --batch-size 1 --json 2>$null > runs\$ts\raw.json
+sf agent test run-eval --spec $R\spec.yaml --target-org <alias> `
+  --batch-size 1 --json 2>$null > $R\raw.json
 
 # 3. El veredicto de verdad — nunca el código de salida de la CLI.
 #    --expect-version es OBLIGATORIO: sin él sale 1 y avisa que no es auditable.
 #    El valor te lo dio el preflight.
-node lib/assert.mjs --raw runs\$ts\raw.json --suite agents\<slug>\suites\ruteo.cases.yaml `
+node lib/assert.mjs --raw $R\raw.json --suite agents\<slug>\suites\ruteo.cases.yaml `
   --engine run-eval --expect-version <BotVersionId>
 
 # 4. El informe presentable
 node lib/report.mjs --suite agents\<slug>\suites\ruteo.cases.yaml `
-  --raw runs\$ts\raw.json --agent agents\<slug>\agent.json `
-  --vocabulary agents\<slug>\vocabulary.json --out runs\$ts\informe.md
+  --raw $R\raw.json --agent agents\<slug>\agent.json `
+  --vocabulary agents\<slug>\vocabulary.json --out $R\informe.md
+
+# 5. Registrar la corrida en la bitácora del agente
+node lib/bitacora.mjs --registrar --run $R `
+  --suite agents\<slug>\suites\ruteo.cases.yaml `
+  --proposito "batería de ruteo" --nota "qué decidiste y por qué"
 ```
 
 🚨 **El paso 3 no es opcional.** El código de salida de la CLI **está invertido**:
@@ -208,6 +216,29 @@ y te avisa que el resultado **no es auditable**: leer la versión de la corrida 
 es lo mismo que contrastarla contra la activa. Si necesitás una corrida
 exploratoria, `--no-version-check` lo permite — y deja constancia en la salida,
 para que nadie use ese resultado como evidencia.
+
+### El paso 5 es lo que hace auditable todo lo anterior
+
+Deja tres cosas: `RESUMEN.md` en la carpeta —qué se testeó y qué dio, caso por
+caso, con una columna para **lo que NO se verificó**—, `manifiesto.json` con el
+sha256 de cada archivo, y una entrada en `agents/<slug>/BITACORA.md`.
+
+La bitácora tiene dos capas y la diferencia importa: lo **derivado** lo calcula
+el script leyendo los artefactos —la versión sale del crudo, los veredictos se
+recalculan— y lo **narrado** es tu nota, marcada como auto-reportada. Si las dos
+se contradicen, gana la derivada.
+
+---
+
+## Antes de cerrar
+
+```powershell
+npm run bitacora -- --verificar --agente agents\<slug>
+```
+
+Detecta corridas sin registrar, entradas borradas y artefactos alterados después
+del hecho. **Es el control contra el olvido**, tuyo o de quien haya corrido: una
+regla escrita se puede incumplir sin que se note, una corrida sin entrada no.
 
 ---
 

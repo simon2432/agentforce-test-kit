@@ -86,6 +86,32 @@ archivo es para vos, no para él.
     lento y mucho más impredecible (σ 0,03 s contra un rango de 30 s).
 14. **Archivar la salida de cada corrida** en `runs/`. `run-eval` es efímero
     total: si no se captura stdout, la corrida se pierde.
+
+    ➡️ **Una carpeta por corrida, dentro del agente**, y TODO adentro:
+    `agents/<slug>/runs/<YYYY-MM-DD-HHmm>-<proposito>/` con `spec.yaml`,
+    `raw.json`, `informe.md`, `RESUMEN.md`, `manifiesto.json`. Nunca en la raíz,
+    nunca mezclando dos agentes, nunca reusando una carpeta.
+
+    🚨 **Y registrar la corrida ANTES de reportarle nada al usuario:**
+
+    ```
+    npm run bitacora -- --registrar --run <carpeta> --suite <cases.yaml> \
+      --proposito "<qué se probó>" --nota "<qué decidiste y por qué>"
+    ```
+
+    Escribe `RESUMEN.md` (qué se testeó y qué dio, caso por caso),
+    `manifiesto.json` (sha256 de cada artefacto) y agrega la entrada a
+    `agents/<slug>/BITACORA.md`.
+
+    ⚠️ **Tu nota va en la capa NARRADA, que está marcada como auto-reportada y no
+    es evidencia.** No la escribas como si lo fuera. Poné lo que decidiste, lo
+    que descartaste y lo que salió mal — sobre todo lo que salió mal. Los números
+    los deriva el script solo, y si tu nota los contradice, gana el script.
+
+    ➡️ Al cerrar la sesión: `npm run bitacora -- --verificar --agente agents/<slug>`.
+    Detecta corridas sin registrar, entradas borradas y artefactos alterados.
+    **Es el único control real contra tu propio olvido:** esta regla se puede
+    incumplir sin que se note, una corrida sin entrada no.
 15. **Usar `--json`, no `--result-format json`.** Son dos formatos distintos; el
     segundo produce un stdout que no es JSON válido.
 

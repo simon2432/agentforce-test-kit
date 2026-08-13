@@ -169,7 +169,7 @@ contexto, ni deducir destinos leyendo el código del agente. Está prohibido en
 | `SKILLS.md` | Qué skills hay y por qué |
 | `knowledge/` | El conocimiento profundo, con nivel de confianza por afirmación |
 | `.claude/skills/` | 16 skills de Agentforce, de ~112 disponibles |
-| `lib/` + `tests/` | 7 utilidades, 91 tests |
+| `lib/` + `tests/` | 8 utilidades, 110 tests |
 | `agents/_template/` | Plantillas para registrar **tu** agente |
 | `ejemplos/bici-store/` | Un agente de juguete completo, con baterías reales |
 | `evidencia/` | Los 3 registros de investigación y sus salidas crudas |

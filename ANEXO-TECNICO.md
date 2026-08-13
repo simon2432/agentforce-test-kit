@@ -304,7 +304,7 @@ encontramos **tres bugs en `assert.mjs`** —la capa que existe precisamente par
 corregir los bugs de la plataforma—, los tres falsos negativos. **La capa en la
 que más confiamos era la única sin tests propios.**
 
-Los tres están arreglados y hoy `lib/` tiene 91 tests (`npm test`). Pero el punto
+Los tres están arreglados y hoy `lib/` tiene 110 tests (`npm test`). Pero el punto
 no es que estén arreglados: es que **aparecieron recién en la tercera ronda de
 uso**, contra el primer agente que no habíamos armado nosotros.
 
