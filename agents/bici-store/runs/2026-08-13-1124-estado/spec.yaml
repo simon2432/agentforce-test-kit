@@ -1,0 +1,43 @@
+name: estado
+subjectType: AGENT
+subjectName: Bici_Store
+testCases:
+  - utterance: No, gracias, eso es todo
+    expectedTopic: Encuesta
+  - utterance: "5"
+    conversationHistory:
+      - role: user
+        message: No, gracias, eso es todo
+    expectedTopic: Encuesta
+    customEvaluations:
+      - name: string_comparison
+        label: la nota 5 quedó guardada en encuestaNota
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.sessionContext.stateVariables.encuestaNota}"
+          - name: expected
+            value: "5"
+  - utterance: Muy buena atención, súper rápidos
+    conversationHistory:
+      - role: user
+        message: No, gracias, eso es todo
+      - role: user
+        message: "5"
+    expectedTopic: Encuesta
+  - utterance: ocho
+    conversationHistory:
+      - role: user
+        message: No, gracias, eso es todo
+    expectedTopic: Encuesta
+    customEvaluations:
+      - name: string_comparison
+        label: ante una nota inválida la etapa NO avanza
+        parameters:
+          - name: operator
+            value: equals
+          - name: actual
+            value: "{gs.response.planner_response.sessionContext.stateVariables.encuestaEtapa}"
+          - name: expected
+            value: esperando_nota

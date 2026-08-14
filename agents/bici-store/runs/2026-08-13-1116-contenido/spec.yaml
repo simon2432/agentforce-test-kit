@@ -1,0 +1,106 @@
+name: contenido
+subjectType: AGENT
+subjectName: Bici_Store
+testCases:
+  - utterance: ¿A qué hora abren?
+    expectedTopic: Faq
+    expectedActions:
+      - consultar_faq
+    customEvaluations:
+      - label: consultar_faq devolvió el literal exacto de horario
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: equals
+            isReference: false
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+            isReference: true
+          - name: expected
+            value: Abrimos de lunes a sábado de 9 a 19 horas.
+            isReference: false
+  - utterance: ¿Cuánto demora el envío a domicilio?
+    expectedTopic: Faq
+    expectedActions:
+      - consultar_faq
+    customEvaluations:
+      - label: consultar_faq devolvió el literal exacto de envío
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: equals
+            isReference: false
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+            isReference: true
+          - name: expected
+            value: El envío a domicilio demora entre 3 y 5 días hábiles.
+            isReference: false
+  - utterance: ¿Qué garantía tienen las bicicletas?
+    expectedTopic: Faq
+    expectedActions:
+      - consultar_faq
+    customEvaluations:
+      - label: consultar_faq devolvió el literal exacto de garantía
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: equals
+            isReference: false
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+            isReference: true
+          - name: expected
+            value: Todas las bicicletas tienen 12 meses de garantía.
+            isReference: false
+  - utterance: ¿Puedo pagar en cuotas?
+    expectedTopic: Faq
+    expectedActions:
+      - consultar_faq
+    customEvaluations:
+      - label: consultar_faq devolvió el literal exacto de cuotas
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: equals
+            isReference: false
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+            isReference: true
+          - name: expected
+            value: Ofrecemos hasta 12 cuotas sin interés con tarjetas bancarias.
+            isReference: false
+  - utterance: ¿Dónde tienen sucursales?
+    expectedTopic: Faq
+    expectedActions:
+      - consultar_faq
+    customEvaluations:
+      - label: consultar_faq devolvió el literal exacto de sucursales
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: equals
+            isReference: false
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+            isReference: true
+          - name: expected
+            value: Tenemos sucursales en Providencia, Ñuñoa y Las Condes.
+            isReference: false
+  - utterance: ¿Cuánto sale la bicicleta de montaña rodado 29?
+    expectedTopic: Faq
+    expectedActions:
+      - consultar_faq
+    customEvaluations:
+      - label: ante una consulta sin dato, la acción devuelve el fallback y no inventa
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: equals
+            isReference: false
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+            isReference: true
+          - name: expected
+            value: No tengo información sobre esa consulta.
+            isReference: false

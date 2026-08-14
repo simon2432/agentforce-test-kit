@@ -1,0 +1,113 @@
+{
+  "$comment": "Registro del agente Bici_Store tal como está PUBLICADO HOY (v3). No confundir con ejemplos/bici-store/, que es la evidencia congelada de la ronda 2 y describe v2 (hoy Inactive). El vocabulario de aquel NO se reutiliza: se regenera por descubrimiento contra v3.",
+
+  "slug": "bici-store",
+  "apiName": "Bici_Store",
+  "label": "Bici Store",
+
+  "org": {
+    "alias": "OrgAntartida",
+    "orgId": "00Dal00000JfUW4EAN",
+    "instanceUrl": "https://antartida.my.salesforce.com",
+    "username": "ncapiel@antartida.io",
+    "isSandbox": false,
+    "$comment": "🚨 NO es sandbox. El orgId es la guarda: el preflight verifica que el alias resuelva a este Id y aborta si no. En esta CLI hay conectadas otras dos orgs, una de ellas de OTRO cliente (sura-dev): nunca depender de la org default, que además apunta a clinica-alemana."
+  },
+
+  "agentType": "EinsteinServiceAgent",
+  "botDefinitionId": "0Xxal000000rUCrCAM",
+  "agentTemplate": "SvcCopilotTmpl__AgentforceServiceAgent",
+  "agentScript": true,
+
+  "authoringBundle": "Bici_Store_3",
+  "$comment_authoringBundle": "Bundle publicado al 2026-08-13. Bici_Store_1 y Bici_Store_2 respaldan v1 y v2, ambas Inactive.",
+
+  "language": "es",
+  "$comment_language": "default_locale es_MX, voz rioplatense (voseo). Las utterances se escriben en español.",
+
+  "version": {
+    "pinned": null,
+    "resolved": 3,
+    "status": "Active",
+    "botVersionId": "0X9al000000qfiDCAQ",
+    "verifiedAt": "2026-08-13",
+    "previous": { "version": 2, "status": "Inactive", "botVersionId": "0X9al000000qaVdCAI" },
+    "$comment": "v3 es la de mayor VersionNumber Y la Active: D1 no se dispara. Igual se pasa --expect-version a assert.mjs, porque el preflight tiene ventana de carrera y sólo la corrida misma cierra la verificación."
+  },
+
+  "engines": {
+    "default": "run-eval",
+    "batchSize": 1,
+    "resultFlag": "--json"
+  },
+
+  "subagents": [
+    {
+      "name": "router",
+      "start": true,
+      "purpose": "Clasifica cada mensaje y transiciona. Sólo @utils.transition. Nunca aparece como topic.",
+      "actions": ["go_to_faq", "go_to_consejos", "go_to_off_topic", "go_to_escalar", "go_to_encuesta"],
+      "writesData": false
+    },
+    {
+      "name": "Faq",
+      "purpose": "Preguntas frecuentes de la tienda. Camino determinista.",
+      "actions": ["consultar_faq"],
+      "actionTargets": ["apex://BiciStoreFaq"],
+      "writesData": false,
+      "$comment_writesData": "Apex auditado el 2026-08-13 leyendo el cuerpo de la clase en la org: sin DML, sin SOQL. Map de 10 respuestas literales + fallback, con orden de prioridad explícito."
+    },
+    {
+      "name": "Consejos",
+      "purpose": "Consejos de uso y mantenimiento. Camino NO determinista (prompt template).",
+      "actions": ["generar_consejos"],
+      "actionTargets": ["generatePromptResponse://Bici_Store_Consejos"],
+      "writesData": false
+    },
+    {
+      "name": "OffTopic",
+      "purpose": "Rechazo con texto fijo. Sin acciones. Contiene además reglas anti-inyección propias.",
+      "actions": [],
+      "writesData": false
+    },
+    {
+      "name": "Escalar",
+      "purpose": "Pide datos de contacto para que un vendedor responda. Estado de un pedido puntual o pedido explícito de hablar con alguien.",
+      "actions": [],
+      "writesData": false,
+      "$comment": "🚨 CAMBIO DE v2 A v3: v2 invocaba @utils.escalate y el topic reportado era `__human__`. v3 no tiene acciones — la org no tiene colas de Omni-Channel, así que la escalación real no podía completarse — y el topic reportado es `Escalar`."
+    },
+    {
+      "name": "Encuesta",
+      "purpose": "Encuesta de cierre multi-turno. Sólo @utils.setVariables sobre variables de sesión.",
+      "actions": ["setEncuestaEtapa", "setEncuestaNota", "setEncuestaComentario"],
+      "writesData": false,
+      "$comment_writesData": "Son @utils.setVariables sobre memoria de sesión (visibility Internal). No hay flow, no hay Apex, no hay DML."
+    }
+  ],
+
+  "stateVariables": {
+    "encuestaEtapa": ["no_iniciada", "esperando_nota", "esperando_comentario", "lista"],
+    "encuestaNota": "string",
+    "encuestaComentario": "string",
+    "$comment": "🚨 RoutableId / EndUserId / ContactId / EndUserLanguage / ChannelType son `linked` y NUNCA se siembran. Observadas en NULL en todas las corridas de v3."
+  },
+
+  "quality": {
+    "respondingTopics": ["Faq", "Consejos"],
+    "$comment": "Sólo los dos topics que RESPONDEN entran en el promedio de métricas. OffTopic, Escalar, Prompt_Injection y Reverse_Engineering quedan fuera a propósito: coherence/completeness castigan los rechazos correctos y darían vuelta el promedio. Ver LIMITES.md punto 8."
+  },
+
+  "dmlAudit": {
+    "fecha": "2026-08-13",
+    "resultado": "NINGUNA acción del agente hace DML.",
+    "$comment": "Auditado leyendo el código, no la prosa del .agent: cuerpo de la ApexClass BiciStoreFaq consultado por Tooling API (sin insert/update/delete/upsert/Database./SELECT), Consejos es un generatePromptResponse, Encuesta sólo @utils.setVariables y Escalar no tiene acciones. Además las 5 variables `linked` llegan NULL bajo test, que es la razón estructural independiente."
+  },
+
+  "orgConstraints": {
+    "dataCloud": false,
+    "observability": false,
+    "omniChannelQueues": false,
+    "$comment": "Heredado de la ronda 2 sobre esta misma org. Sin colas de Omni-Channel la escalación no puede completarse del todo."
+  }
+}

@@ -13,7 +13,7 @@
  */
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { checkOrg, checkVersion, preflight } from '../lib/preflight.mjs';
+import { checkOrg, checkVersion, preflight, quoteArg, sfJson } from '../lib/preflight.mjs';
 
 const AGENT = {
   apiName: 'MI_Agente',
@@ -31,6 +31,45 @@ const mockSf = (rutas) => (_cmd, args) => {
 
 const versiones = (recs) => ({ status: 0, result: { records: recs } });
 const v = (n, id, status) => ({ Id: id, VersionNumber: n, Status: status });
+
+// ---------------------------------------------------------------------------
+describe('entrecomillado de argumentos — el bug que el mock no podía ver', () => {
+  /**
+   * Regresión del 2026-08-13. Con `shell: true` Node une los argumentos con
+   * espacios sin entrecomillar, así que la SOQL de `checkVersion` se partía y
+   * `-q` recibía sólo `SELECT`. El preflight lo reportaba como «no hay
+   * BotVersion», culpando a la org de un bug del cliente.
+   *
+   * Los demás tests de este archivo mockean `sf` recibiendo el ARRAY de
+   * argumentos, así que por construcción no pueden ver lo que arma el shell.
+   * Estos miran la línea, que es donde estaba el defecto.
+   */
+  test('un argumento con espacios viaja como UN argumento', () => {
+    const q = "SELECT Id FROM BotVersion WHERE BotDefinition.DeveloperName = 'X'";
+    const citado = quoteArg(q);
+    assert.equal(citado.includes(' '), true, 'la consulta conserva sus espacios');
+    // Lo que importa: entrecomillado, para que el shell no lo parta.
+    assert.match(citado, /^["'].*["']$/);
+  });
+
+  test('un argumento simple NO se toca — no ensucia la línea', () => {
+    assert.equal(quoteArg('--target-org'), '--target-org');
+    assert.equal(quoteArg('OrgAntartida'), 'OrgAntartida');
+    assert.equal(quoteArg('data'), 'data');
+  });
+
+  test('la SOQL llega entera a la línea del shell', () => {
+    let linea = null;
+    const exec = (_cmd, args) => {
+      linea = args.join(' ');
+      return JSON.stringify({ status: 0, result: { records: [] } });
+    };
+    sfJson(['data', 'query', '-q', 'SELECT Id FROM BotVersion', '--target-org', 'x'], { exec });
+    // Antes del fix la línea era `-q SELECT Id FROM BotVersion`, y el shell le
+    // pasaba a `-q` solamente `SELECT`.
+    assert.match(linea, /-q ["']SELECT Id FROM BotVersion["']/);
+  });
+});
 
 // ---------------------------------------------------------------------------
 describe('guarda de org — el typo de alias que apunta a otro cliente', () => {

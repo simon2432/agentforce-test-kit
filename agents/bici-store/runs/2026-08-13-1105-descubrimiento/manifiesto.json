@@ -1,0 +1,205 @@
+{
+  "registradoEn": "2026-08-13T11:36:27-03:00",
+  "carpeta": "agents/bici-store/runs/2026-08-13-1105-descubrimiento",
+  "motor": "run-eval",
+  "suite": {
+    "archivo": "agents/bici-store/suites/descubrimiento.cases.yaml",
+    "sha256": "507ce72367a1f00afaee129118569f8e7c3914b7ddfbf186ea51a57aabc986ab",
+    "casos": 13,
+    "nombre": "descubrimiento"
+  },
+  "version": {
+    "botVersionId": "0X9al000000qfiDCAQ",
+    "versionApiName": "v3",
+    "auditable": true,
+    "unaSolaVersion": true
+  },
+  "tooling": {
+    "cli": "@salesforce/cli/2.146.3",
+    "pluginAgent": "1.45.0",
+    "disponible": true
+  },
+  "resultado": {
+    "casos": 13,
+    "passed": 0,
+    "failed": 13,
+    "error": 0,
+    "missing": 0,
+    "skipped": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "safetyFallidos": [],
+    "censo": {
+      "declaradas": 0,
+      "faltantes": 0,
+      "sinResolver": 0
+    }
+  },
+  "duracionMs": 54072,
+  "filas": [
+    {
+      "id": "D01",
+      "verdict": "FAILED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "D02",
+      "verdict": "FAILED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "D03",
+      "verdict": "FAILED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "D04",
+      "verdict": "FAILED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "D05",
+      "verdict": "FAILED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "D06",
+      "verdict": "FAILED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "D07",
+      "verdict": "FAILED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "D08",
+      "verdict": "FAILED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "D09",
+      "verdict": "FAILED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "D10",
+      "verdict": "FAILED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "D11",
+      "verdict": "FAILED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "D12",
+      "verdict": "FAILED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "D13",
+      "verdict": "FAILED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    }
+  ],
+  "artefactos": [
+    {
+      "archivo": "RESUMEN.md",
+      "bytes": 2651,
+      "sha256": "e8abea66c1271005e4e49dd377ced4f42f620f9f6ec53f8707a0120b14d696c4"
+    },
+    {
+      "archivo": "raw-1.json",
+      "bytes": 493190,
+      "sha256": "c70cc7f5ba32e6c6c96ee62fd2d4acb5cee2ba4b9cfa941bbd9e4bb906bd6a53"
+    },
+    {
+      "archivo": "raw-2.json",
+      "bytes": 492949,
+      "sha256": "995573ee0be865060fbe4c986e2b6151ae8027e7c9d6610616e4ef8b1719fb2b"
+    },
+    {
+      "archivo": "raw-3.json",
+      "bytes": 493137,
+      "sha256": "7648e6ee3b77ee29bd66a94eed9e3868d7a398d220d67c5df696faa0fcc2d29a"
+    },
+    {
+      "archivo": "raw.json",
+      "bytes": 493190,
+      "sha256": "c70cc7f5ba32e6c6c96ee62fd2d4acb5cee2ba4b9cfa941bbd9e4bb906bd6a53"
+    },
+    {
+      "archivo": "spec.yaml",
+      "bytes": 1166,
+      "sha256": "8e31cc94e035119fffd5f0ed4a81fae2f713e532ba9c0884e0395330fb136cb4"
+    },
+    {
+      "archivo": "summary-1.json",
+      "bytes": 20492,
+      "sha256": "82e09d43e66607f0fffe9b107f04a2f255f267a6a8f7de3a86f1c416fef6352f"
+    },
+    {
+      "archivo": "summary-2.json",
+      "bytes": 19786,
+      "sha256": "0a563435c6762ed991e10c240b5cf1572fd01d6cef09b4eb4498b5c3ffbc88a0"
+    },
+    {
+      "archivo": "summary-3.json",
+      "bytes": 19873,
+      "sha256": "dd932f9a0f7732b965eab5944e341ff77a30ff76644e1efb8f671ce31789801d"
+    }
+  ]
+}

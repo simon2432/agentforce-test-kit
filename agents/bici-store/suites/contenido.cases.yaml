@@ -1,0 +1,168 @@
+# Contenido determinista — Bici_Store v3
+#
+# Esta suite existe por el hallazgo 3 de knowledge/00-index.md: la estabilidad
+# del ruteo NO es estabilidad de comportamiento. Un agente puede mandar siempre
+# la consulta al mismo subagente y, en unas corridas consultar su base de
+# conocimiento y en otras contestar de memoria. Una suite que sólo asserta el
+# topic reporta eso como perfecto.
+#
+# 🚨 QUÉ SE ASSERTA ACÁ, Y QUÉ NO:
+#   SÍ  → el OUTPUT de la acción determinista (apex://BiciStoreFaq), que es
+#         byte-exacto. Verificado contra el código de la clase Apex (Map de
+#         literales, sin DML ni SOQL) y contra el output real de la corrida.
+#   NO  → el texto que el agente le muestra al usuario. El agente le agrega
+#         texto propio y eso NO es reproducible.
+#
+# ⚠️ Cada caso lleva `topic` OBLIGATORIO además de la ref cruda. Sin él no se
+#    ejecuta el paso que resuelve la referencia y el motor compara contra el
+#    template literal: FAIL silencioso, indistinguible de una regresión real.
+#
+# ⚠️ Este mecanismo sólo existe en `run-eval`, que es BETA y no tiene segunda
+#    fuente. Ver LIMITES.md punto 1.
+
+suite: contenido
+agent: bici-store
+description: Verifica que la acción determinista de Faq devuelva el literal exacto, no sólo que se haya invocado.
+
+cases:
+
+  - id: C01
+    utterance: ¿A qué hora abren?
+    expect:
+      topic: Faq
+      match: exact
+      actions: [consultar_faq]
+    customEvaluations:
+      - label: consultar_faq devolvió el literal exacto de horario
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: equals
+            isReference: false
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+            isReference: true
+          - name: expected
+            value: Abrimos de lunes a sábado de 9 a 19 horas.
+            isReference: false
+    gate: true
+    severity: content
+
+  - id: C02
+    utterance: ¿Cuánto demora el envío a domicilio?
+    expect:
+      topic: Faq
+      match: exact
+      actions: [consultar_faq]
+    customEvaluations:
+      - label: consultar_faq devolvió el literal exacto de envío
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: equals
+            isReference: false
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+            isReference: true
+          - name: expected
+            value: El envío a domicilio demora entre 3 y 5 días hábiles.
+            isReference: false
+    gate: true
+    severity: content
+
+  - id: C03
+    utterance: ¿Qué garantía tienen las bicicletas?
+    expect:
+      topic: Faq
+      match: exact
+      actions: [consultar_faq]
+    customEvaluations:
+      - label: consultar_faq devolvió el literal exacto de garantía
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: equals
+            isReference: false
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+            isReference: true
+          - name: expected
+            value: Todas las bicicletas tienen 12 meses de garantía.
+            isReference: false
+    gate: true
+    severity: content
+
+  - id: C04
+    utterance: ¿Puedo pagar en cuotas?
+    expect:
+      topic: Faq
+      match: exact
+      actions: [consultar_faq]
+    customEvaluations:
+      - label: consultar_faq devolvió el literal exacto de cuotas
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: equals
+            isReference: false
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+            isReference: true
+          - name: expected
+            value: Ofrecemos hasta 12 cuotas sin interés con tarjetas bancarias.
+            isReference: false
+    gate: true
+    severity: content
+    note: >-
+      Verifica de paso el orden de prioridad del Apex: 'cuotas' se evalúa antes
+      que 'pago', y esta consulta contiene tokens de las dos claves.
+
+  - id: C05
+    utterance: ¿Dónde tienen sucursales?
+    expect:
+      topic: Faq
+      match: exact
+      actions: [consultar_faq]
+    customEvaluations:
+      - label: consultar_faq devolvió el literal exacto de sucursales
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: equals
+            isReference: false
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+            isReference: true
+          - name: expected
+            value: Tenemos sucursales en Providencia, Ñuñoa y Las Condes.
+            isReference: false
+    gate: true
+    severity: content
+
+  # ── El fallback. Es el caso que más importa de esta suite: verifica que ante
+  #    algo que la tienda NO sabe, la acción devuelva el literal de "no sé" en
+  #    vez de inventar. Es un control anti-alucinación en el borde determinista.
+  - id: C06
+    utterance: ¿Cuánto sale la bicicleta de montaña rodado 29?
+    expect:
+      topic: Faq
+      match: exact
+      actions: [consultar_faq]
+    customEvaluations:
+      - label: ante una consulta sin dato, la acción devuelve el fallback y no inventa
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: equals
+            isReference: false
+          - name: actual
+            value: "{gs.response.planner_response.lastExecution.invokedActions[0][0].function.output.respuesta}"
+            isReference: true
+          - name: expected
+            value: No tengo información sobre esa consulta.
+            isReference: false
+    gate: true
+    severity: safety
+    note: >-
+      severity safety: que el borde determinista invente un precio sería un
+      incidente, no una regresión. El Apex no tiene clave de precio.

@@ -1,0 +1,188 @@
+{
+  "registradoEn": "2026-08-13T11:41:45-03:00",
+  "carpeta": "agents/bici-store/runs/2026-08-13-1115-ruteo",
+  "motor": "run-eval",
+  "suite": {
+    "archivo": "agents/bici-store/suites/ruteo.cases.yaml",
+    "sha256": "e7a674b065144bcf946dda316972780d791ca76045610bc642f3e566f8f19c73",
+    "casos": 13,
+    "nombre": "ruteo"
+  },
+  "version": {
+    "botVersionId": "0X9al000000qfiDCAQ",
+    "versionApiName": "v3",
+    "auditable": true,
+    "unaSolaVersion": true
+  },
+  "tooling": {
+    "cli": "@salesforce/cli/2.146.3",
+    "pluginAgent": "1.45.0",
+    "disponible": true
+  },
+  "resultado": {
+    "casos": 13,
+    "passed": 13,
+    "failed": 0,
+    "error": 0,
+    "missing": 0,
+    "skipped": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "safetyFallidos": [],
+    "censo": {
+      "declaradas": 20,
+      "faltantes": 0,
+      "sinResolver": 0
+    }
+  },
+  "duracionMs": 52435,
+  "filas": [
+    {
+      "id": "R01",
+      "verdict": "PASSED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "R02",
+      "verdict": "PASSED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)",
+        "actions"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "R03",
+      "verdict": "PASSED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)",
+        "actions"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "R04",
+      "verdict": "PASSED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)",
+        "actions"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "R05",
+      "verdict": "PASSED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)",
+        "actions"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "R06",
+      "verdict": "PASSED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)",
+        "actions"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "R07",
+      "verdict": "PASSED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)",
+        "actions"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "R08",
+      "verdict": "PASSED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "R09",
+      "verdict": "PASSED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "R10",
+      "verdict": "PASSED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "R11",
+      "verdict": "PASSED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)",
+        "utilActions"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "R12",
+      "verdict": "PASSED",
+      "severity": "safety",
+      "verificado": [
+        "topic(exact)"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "R13",
+      "verdict": "PASSED",
+      "severity": "routing",
+      "verificado": [
+        "topic(exact)",
+        "actions"
+      ],
+      "noVerificado": []
+    }
+  ],
+  "artefactos": [
+    {
+      "archivo": "RESUMEN.md",
+      "bytes": 2401,
+      "sha256": "c08678134ea9b8230194b4160c44531c7e3ae1046c4ace7a3965e0e7ecfed883"
+    },
+    {
+      "archivo": "informe.md",
+      "bytes": 2832,
+      "sha256": "bb5f81b17e6a42a735f5af574f4f40db2f9ad818a176a051b83af6df37190107"
+    },
+    {
+      "archivo": "raw.json",
+      "bytes": 502622,
+      "sha256": "e85f2c1beb161d2090f9a9489ec17ebfa996dda375ea02423bd53691031995bc"
+    },
+    {
+      "archivo": "spec.yaml",
+      "bytes": 1367,
+      "sha256": "983078ff2fcfcc65ab5cdc8ddecac6e2cac93b3e23efbd904403b2ee525ea03b"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+name: estado
+subjectType: AGENT
+subjectName: Bici_Store
+testCases:
+  - conversationHistory:
+      - role: user
+        message: No, gracias, eso es todo
+    expectedTopic: Encuesta
+    customEvaluations:
+      - label: tras pedir la nota, la etapa quedó en esperando_nota
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: equals
+            isReference: false
+          - name: actual
+            value: "{gs.response.planner_response.sessionContext.stateVariables.encuestaEtapa}"
+            isReference: true
+          - name: expected
+            value: esperando_nota
+            isReference: false
+  - conversationHistory:
+      - role: user
+        message: No, gracias, eso es todo
+      - role: user
+        message: "5"
+    expectedTopic: Encuesta
+    customEvaluations:
+      - label: la nota 5 quedó guardada en encuestaNota
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: equals
+            isReference: false
+          - name: actual
+            value: "{gs.response.planner_response.sessionContext.stateVariables.encuestaNota}"
+            isReference: true
+          - name: expected
+            value: "5"
+            isReference: false
+  - conversationHistory:
+      - role: user
+        message: No, gracias, eso es todo
+      - role: user
+        message: "5"
+      - role: user
+        message: Muy buena atención, súper rápidos
+    expectedTopic: Encuesta
+    customEvaluations:
+      - label: la encuesta terminó — etapa lista
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: equals
+            isReference: false
+          - name: actual
+            value: "{gs.response.planner_response.sessionContext.stateVariables.encuestaEtapa}"
+            isReference: true
+          - name: expected
+            value: lista
+            isReference: false
+  - conversationHistory:
+      - role: user
+        message: No, gracias, eso es todo
+      - role: user
+        message: ocho
+    expectedTopic: Encuesta
+    customEvaluations:
+      - label: ante una nota inválida la etapa NO avanza
+        name: string_comparison
+        parameters:
+          - name: operator
+            value: equals
+            isReference: false
+          - name: actual
+            value: "{gs.response.planner_response.sessionContext.stateVariables.encuestaEtapa}"
+            isReference: true
+          - name: expected
+            value: esperando_nota
+            isReference: false

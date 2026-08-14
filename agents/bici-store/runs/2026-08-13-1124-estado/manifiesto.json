@@ -1,0 +1,109 @@
+{
+  "registradoEn": "2026-08-13T11:42:59-03:00",
+  "carpeta": "agents/bici-store/runs/2026-08-13-1124-estado",
+  "motor": "run-eval",
+  "suite": {
+    "archivo": "agents/bici-store/suites/estado.cases.yaml",
+    "sha256": "5a3295bcef310f78d53476205de6788df00baafac3ab504967fffc11849480b0",
+    "casos": 4,
+    "nombre": "estado"
+  },
+  "version": {
+    "botVersionId": "0X9al000000qfiDCAQ",
+    "versionApiName": "v3",
+    "auditable": true,
+    "unaSolaVersion": true
+  },
+  "tooling": {
+    "cli": "@salesforce/cli/2.146.3",
+    "pluginAgent": "1.45.0",
+    "disponible": true
+  },
+  "resultado": {
+    "casos": 4,
+    "passed": 4,
+    "failed": 0,
+    "error": 0,
+    "missing": 0,
+    "skipped": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "safetyFallidos": [],
+    "censo": {
+      "declaradas": 6,
+      "faltantes": 0,
+      "sinResolver": 0
+    }
+  },
+  "duracionMs": 24557,
+  "filas": [
+    {
+      "id": "E01",
+      "verdict": "PASSED",
+      "severity": "state",
+      "verificado": [
+        "topic(exact)",
+        "utilActions",
+        "state.encuestaEtapa"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "E02",
+      "verdict": "PASSED",
+      "severity": "state",
+      "verificado": [
+        "topic(exact)",
+        "utilActions",
+        "state.encuestaEtapa",
+        "state.encuestaNota",
+        "custom[la nota 5 quedó guardada en encuestaNota]"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "E03",
+      "verdict": "PASSED",
+      "severity": "state",
+      "verificado": [
+        "topic(exact)",
+        "utilActions",
+        "state.encuestaEtapa"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "E04",
+      "verdict": "PASSED",
+      "severity": "state",
+      "verificado": [
+        "topic(exact)",
+        "state.encuestaEtapa",
+        "custom[ante una nota inválida la etapa NO avanza]"
+      ],
+      "noVerificado": []
+    }
+  ],
+  "artefactos": [
+    {
+      "archivo": "RESUMEN.md",
+      "bytes": 2182,
+      "sha256": "6ba712c9110b357c83d40ee4bb8a60b72d9e84cf7332633c077292e09aa69982"
+    },
+    {
+      "archivo": "informe.md",
+      "bytes": 1573,
+      "sha256": "4204cca49d5fa9442806c0d1921843ae393af83f8261d2ae58e62d102ad5fd68"
+    },
+    {
+      "archivo": "raw.json",
+      "bytes": 171781,
+      "sha256": "dc7adf26df41bc168c300913cb455b464e947a26d3157eb7ee00468176288dcf"
+    },
+    {
+      "archivo": "spec.yaml",
+      "bytes": 1331,
+      "sha256": "c1cae290165d59c1a9c3447f4ab38dd0f7184b7bb8097a04a136c310814e1101"
+    }
+  ]
+}

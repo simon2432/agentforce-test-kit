@@ -1,0 +1,120 @@
+# Estado y conversación — Bici_Store v3
+#
+# Verifica la máquina de estados de la encuesta de cierre, que es multi-turno.
+# `run-eval` EJECUTA los turnos previos de verdad (no los inyecta), así que el
+# estado final es real: el agente tuvo que pasar por esperando_nota para poder
+# interpretar un "5" como nota.
+#
+# 🚨 FORMATO: `turns` son los turnos PREVIOS y `utterance` es el turno que se
+#    mide. Un caso con `turns` y sin `utterance` hace que el motor devuelva
+#    422 «Field required: agent.send_message.utterance» y NINGUNA aserción
+#    corre — lo detecta el censo, no los veredictos.
+#
+# Lo que se asserta es `sessionContext.stateVariables`, no el texto: las
+# variables son el efecto observable y determinista de la conversación.
+#
+# 🚨 Por qué esto no toca ningún dato: encuestaEtapa / encuestaNota /
+#    encuestaComentario son variables de SESIÓN (visibility Internal). El
+#    subagente Encuesta sólo invoca @utils.setVariables: no hay flow, no hay
+#    Apex, no hay DML. Auditado en el .agent de v3.
+#
+# ⚠️ Sólo run-eval: `test run` exige alternancia user/agent terminando en
+#    agent, y el repo no fabrica turnos de agente.
+
+_paths:
+  etapa: &etapa "{gs.response.planner_response.sessionContext.stateVariables.encuestaEtapa}"
+  nota: &nota "{gs.response.planner_response.sessionContext.stateVariables.encuestaNota}"
+
+suite: estado
+agent: bici-store
+description: Verifica la máquina de estados de la encuesta de cierre a lo largo de varios turnos reales.
+
+cases:
+
+  # ── Turno 1 → la encuesta arranca y queda esperando la nota.
+  - id: E01
+    utterance: No, gracias, eso es todo
+    expect:
+      topic: Encuesta
+      match: exact
+      utilActions: [setEncuestaEtapa]
+      stateVariables:
+        encuestaEtapa: esperando_nota
+    engines: [run-eval]
+    gate: true
+    severity: state
+    note: >-
+      setEncuestaEtapa es @utils.setVariables: se EJECUTA pero no aparece en
+      invokedActions. Va en utilActions, no en actions.
+
+  # ── Turno 2 → guarda la nota y pasa a pedir el comentario.
+  - id: E02
+    turns:
+      - No, gracias, eso es todo
+    utterance: "5"
+    expect:
+      topic: Encuesta
+      match: exact
+      utilActions: [setEncuestaNota, setEncuestaEtapa]
+      stateVariables:
+        encuestaEtapa: esperando_comentario
+        encuestaNota: "5"
+    customEvaluations:
+      - name: string_comparison
+        label: la nota 5 quedó guardada en encuestaNota
+        parameters:
+          - { name: operator, value: equals }
+          - { name: actual, value: *nota }
+          - { name: expected, value: "5" }
+    engines: [run-eval]
+    gate: true
+    severity: state
+    note: >-
+      Verifica de paso la regla del router: con encuestaEtapa en esperando_nota
+      NO se re-clasifica la intención, así que un "5" suelto sigue en Encuesta
+      en vez de irse a Faq.
+
+  # ── Turno 3 → guarda el comentario y cierra la encuesta.
+  - id: E03
+    turns:
+      - No, gracias, eso es todo
+      - "5"
+    utterance: Muy buena atención, súper rápidos
+    expect:
+      topic: Encuesta
+      match: exact
+      utilActions: [setEncuestaComentario, setEncuestaEtapa]
+      stateVariables:
+        encuestaEtapa: lista
+    engines: [run-eval]
+    gate: true
+    severity: state
+    note: >-
+      NO se asserta el contenido de encuestaComentario: lo escribe el modelo
+      parafraseando y no es reproducible. Se asserta que la etapa llegó a
+      `lista`, que es determinista.
+
+  # ── Camino de error: nota inválida. El .agent dice NO cambiar ninguna
+  #    variable y volver a pedir.
+  - id: E04
+    turns:
+      - No, gracias, eso es todo
+    utterance: ocho
+    expect:
+      topic: Encuesta
+      match: exact
+      stateVariables:
+        encuestaEtapa: esperando_nota
+    customEvaluations:
+      - name: string_comparison
+        label: ante una nota inválida la etapa NO avanza
+        parameters:
+          - { name: operator, value: equals }
+          - { name: actual, value: *etapa }
+          - { name: expected, value: esperando_nota }
+    engines: [run-eval]
+    gate: true
+    severity: state
+    note: >-
+      'ocho' no es un número del 1 al 5 en la forma que pide el .agent. Si el
+      agente lo aceptara igual, la etapa avanzaría y este caso lo detecta.

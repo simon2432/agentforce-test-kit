@@ -1,0 +1,86 @@
+{
+  "registradoEn": "2026-08-13T11:42:08-03:00",
+  "carpeta": "agents/bici-store/runs/2026-08-13-1123-estado",
+  "motor": "run-eval",
+  "suite": {
+    "archivo": "agents/bici-store/suites/estado.cases.yaml",
+    "sha256": "5a3295bcef310f78d53476205de6788df00baafac3ab504967fffc11849480b0",
+    "casos": 4,
+    "nombre": "estado"
+  },
+  "version": {
+    "botVersionId": null,
+    "versionApiName": null,
+    "auditable": false,
+    "unaSolaVersion": true
+  },
+  "tooling": {
+    "cli": "@salesforce/cli/2.146.3",
+    "pluginAgent": "1.45.0",
+    "disponible": true
+  },
+  "resultado": {
+    "casos": 4,
+    "passed": 0,
+    "failed": 0,
+    "error": 0,
+    "missing": 4,
+    "skipped": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "safetyFallidos": [],
+    "censo": {
+      "declaradas": 6,
+      "faltantes": 6,
+      "sinResolver": 0
+    }
+  },
+  "duracionMs": null,
+  "filas": [
+    {
+      "id": "E01",
+      "verdict": "MISSING",
+      "severity": "state",
+      "verificado": [],
+      "noVerificado": []
+    },
+    {
+      "id": "E02",
+      "verdict": "MISSING",
+      "severity": "state",
+      "verificado": [],
+      "noVerificado": []
+    },
+    {
+      "id": "E03",
+      "verdict": "MISSING",
+      "severity": "state",
+      "verificado": [],
+      "noVerificado": []
+    },
+    {
+      "id": "E04",
+      "verdict": "MISSING",
+      "severity": "state",
+      "verificado": [],
+      "noVerificado": []
+    }
+  ],
+  "artefactos": [
+    {
+      "archivo": "RESUMEN.md",
+      "bytes": 1993,
+      "sha256": "e2dba480402e9e2411345494c9c973d68db6d05a052959d3b427fbacb46385f1"
+    },
+    {
+      "archivo": "raw.json",
+      "bytes": 5888,
+      "sha256": "ead586a6909b67d88b13aa1c1b9da2587beb3045fa5785a8fa1701b3ca899b26"
+    },
+    {
+      "archivo": "spec.yaml",
+      "bytes": 2540,
+      "sha256": "a154c27b3742c81e4d74c6226f4888572d847e50c5f6e3e0ea37f18d87b26d72"
+    }
+  ]
+}

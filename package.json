@@ -12,6 +12,7 @@
     "extract": "node lib/extract.mjs",
     "assert": "node lib/assert.mjs",
     "report": "node lib/report.mjs",
+    "traza": "node lib/traza.mjs",
     "bitacora": "node lib/bitacora.mjs",
     "fixtures": "node tests/fixtures/build.mjs"
   },

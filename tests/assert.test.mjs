@@ -15,7 +15,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import YAML from 'yaml';
-import { normalize, evaluate, matchTopic, report } from '../lib/assert.mjs';
+import { normalize, evaluate, matchTopic, report, compareCustom, paramOf } from '../lib/assert.mjs';
 
 const FX = path.resolve(import.meta.dirname, 'fixtures');
 const fx = (f) => path.join(FX, f);
@@ -31,6 +31,81 @@ function run(rawFile, suiteFile, engine) {
 }
 
 const checkOf = (row, name) => row.checks.find((c) => c.name.startsWith(name));
+
+// ---------------------------------------------------------------------------
+describe('BUG 4 — el veredicto de customEvaluations no se calculaba (2026-08-13)', () => {
+  /**
+   * Medido contra una corrida real de Bici_Store v3: la aserción de contenido
+   * entraba al CENSO (declaré 1, volvió 1) pero su resultado no lo miraba
+   * nadie. Con el literal esperado cambiado por uno falso, el caso seguía
+   * dando PASSED y el proceso exit 0.
+   *
+   * Es el falso negativo más caro posible: rompe justo la verificación de
+   * contenido determinista, que es lo único que distingue este enfoque de una
+   * mera verificación de ruteo.
+   */
+  const evalDe = (id, actual, expected) => ({
+    key: id, actual, expected, isPass: actual === expected,
+  });
+  const casoCon = (esperado) => ({
+    id: 'C1',
+    expect: { topic: 'Faq' },
+    customEvaluations: [{
+      label: 'literal exacto',
+      name: 'string_comparison',
+      parameters: [
+        { name: 'operator', value: 'equals', isReference: false },
+        { name: 'actual', value: '{gs.response.planner_response.x}', isReference: true },
+        { name: 'expected', value: esperado, isReference: false },
+      ],
+    }],
+  });
+  const corrida = (real) => [{
+    topic: 'Faq', invokedActions: [], utilActions: [], evaluations: [evalDe('custom_0', real, null)],
+  }];
+
+  test('un literal esperado EQUIVOCADO da FAILED', () => {
+    const rows = evaluate(corrida('Abrimos de 9 a 19.'), [casoCon('OTRA COSA')], { engine: 'run-eval' });
+    assert.equal(rows[0].verdict, 'FAILED');
+    assert.equal(checkOf(rows[0], 'custom').verdict, 'FAIL');
+  });
+
+  test('el literal correcto da PASSED', () => {
+    const rows = evaluate(corrida('Abrimos de 9 a 19.'), [casoCon('Abrimos de 9 a 19.')], { engine: 'run-eval' });
+    assert.equal(rows[0].verdict, 'PASSED');
+    assert.equal(checkOf(rows[0], 'custom').verdict, 'PASS');
+  });
+
+  test('una referencia que NO resolvió da FAIL, no verde por omisión (D4)', () => {
+    const rows = evaluate(corrida('{gs.response.planner_response.x}'), [casoCon('lo que sea')], { engine: 'run-eval' });
+    assert.equal(rows[0].verdict, 'FAILED');
+    assert.match(checkOf(rows[0], 'custom').detail, /NO resolvió/);
+  });
+
+  test('si la evaluación no volvió del motor, el caso NO queda verde', () => {
+    const sinEval = [{ topic: 'Faq', invokedActions: [], utilActions: [], evaluations: [] }];
+    const rows = evaluate(sinEval, [casoCon('x')], { engine: 'run-eval' });
+    assert.equal(rows[0].verdict, 'FAILED');
+  });
+
+  test('en test-run se marca SKIP, no PASS: colapsa las repetidas y no se puede aparear', () => {
+    const rows = evaluate(corrida('x'), [casoCon('x')], { engine: 'test-run' });
+    assert.equal(checkOf(rows[0], 'custom').verdict, 'SKIP');
+  });
+
+  test('compareCustom cubre los operadores y avisa cuando no puede', () => {
+    assert.equal(compareCustom('equals', 'a', 'a').ok, true);
+    assert.equal(compareCustom('equals', 'a', 'b').ok, false);
+    assert.equal(compareCustom('contains', 'hola mundo', 'mundo').ok, true);
+    assert.equal(compareCustom('not_contains', 'hola', 'chau').ok, true);
+    assert.equal(compareCustom('regex_raro', 'a', 'b').comparable, false);
+  });
+
+  test('paramOf lee el parámetro declarado', () => {
+    assert.equal(paramOf(casoCon('X').customEvaluations[0], 'expected'), 'X');
+    assert.equal(paramOf(casoCon('X').customEvaluations[0], 'operator'), 'equals');
+  });
+});
 
 // ---------------------------------------------------------------------------
 describe('BUG 1 — los nombres de acción de `test run` vienen HTML-escapados', () => {

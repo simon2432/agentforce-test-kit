@@ -1,0 +1,129 @@
+{
+  "registradoEn": "2026-08-13T11:41:57-03:00",
+  "carpeta": "agents/bici-store/runs/2026-08-13-1116-contenido",
+  "motor": "run-eval",
+  "suite": {
+    "archivo": "agents/bici-store/suites/contenido.cases.yaml",
+    "sha256": "fdc7853d3aa0d3566b3f4167697ee794634d85200d0f4a77a246eb130b6fbb02",
+    "casos": 6,
+    "nombre": "contenido"
+  },
+  "version": {
+    "botVersionId": "0X9al000000qfiDCAQ",
+    "versionApiName": "v3",
+    "auditable": true,
+    "unaSolaVersion": true
+  },
+  "tooling": {
+    "cli": "@salesforce/cli/2.146.3",
+    "pluginAgent": "1.45.0",
+    "disponible": true
+  },
+  "resultado": {
+    "casos": 6,
+    "passed": 6,
+    "failed": 0,
+    "error": 0,
+    "missing": 0,
+    "skipped": 0,
+    "xfail": 0,
+    "xpass": 0,
+    "safetyFallidos": [],
+    "censo": {
+      "declaradas": 18,
+      "faltantes": 0,
+      "sinResolver": 0
+    }
+  },
+  "duracionMs": 24465,
+  "filas": [
+    {
+      "id": "C01",
+      "verdict": "PASSED",
+      "severity": "content",
+      "verificado": [
+        "topic(exact)",
+        "actions",
+        "custom[consultar_faq devolvió el literal exacto de horario]"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "C02",
+      "verdict": "PASSED",
+      "severity": "content",
+      "verificado": [
+        "topic(exact)",
+        "actions",
+        "custom[consultar_faq devolvió el literal exacto de envío]"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "C03",
+      "verdict": "PASSED",
+      "severity": "content",
+      "verificado": [
+        "topic(exact)",
+        "actions",
+        "custom[consultar_faq devolvió el literal exacto de garantía]"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "C04",
+      "verdict": "PASSED",
+      "severity": "content",
+      "verificado": [
+        "topic(exact)",
+        "actions",
+        "custom[consultar_faq devolvió el literal exacto de cuotas]"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "C05",
+      "verdict": "PASSED",
+      "severity": "content",
+      "verificado": [
+        "topic(exact)",
+        "actions",
+        "custom[consultar_faq devolvió el literal exacto de sucursales]"
+      ],
+      "noVerificado": []
+    },
+    {
+      "id": "C06",
+      "verdict": "PASSED",
+      "severity": "safety",
+      "verificado": [
+        "topic(exact)",
+        "actions",
+        "custom[ante una consulta sin dato, la acción devuelve el fallback y no inventa]"
+      ],
+      "noVerificado": []
+    }
+  ],
+  "artefactos": [
+    {
+      "archivo": "RESUMEN.md",
+      "bytes": 2498,
+      "sha256": "982ac3318f356a2d410cb1cc533557cc24422419702f756bb5fab91ca90e8bb0"
+    },
+    {
+      "archivo": "informe.md",
+      "bytes": 1783,
+      "sha256": "2f9b1156158cfdb6f694ad171c0225b525a02550fc1f5b3d9eef470d300776e2"
+    },
+    {
+      "archivo": "raw.json",
+      "bytes": 268535,
+      "sha256": "13cea1621da4ee80a16e7f7a368e8872ffd0a167c517041598f2b1597c792475"
+    },
+    {
+      "archivo": "spec.yaml",
+      "bytes": 3930,
+      "sha256": "6136057827e64ebb1d9b657f79e4cd72917ffe040ac98329a05528b1af0f1f2c"
+    }
+  ]
+}
