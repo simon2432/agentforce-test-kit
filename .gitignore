@@ -1,0 +1,34 @@
+node_modules/
+
+# Salidas de corridas nuevas, en la raíz. La regla 14 de CLAUDE.md dice que no
+# van acá —van en agents/<slug>/runs/—, pero si alguien las deja igual, no se
+# versionan.
+/runs/
+
+# Corridas por agente. Los CRUDOS no se versionan —traen las conversaciones
+# enteras, que en un agente de cliente es dato sensible, y en git es para
+# siempre—. Pero el RASTRO DE AUDITORÍA sí: BITACORA.md, RESUMEN.md y
+# manifiesto.json (que lleva el sha256 de cada crudo).
+#
+# Consecuencia, dicha explícitamente: quien clone el repo puede comprobar la
+# CONSISTENCIA de la cadena, no re-derivarla. Para re-derivar hace falta el
+# crudo, que vive en la máquina de quien corrió.
+agents/*/runs/**
+!agents/*/runs/*/
+!agents/*/runs/*/RESUMEN.md
+!agents/*/runs/*/manifiesto.json
+!agents/*/runs/*/informe.md
+!agents/*/runs/*/spec.yaml
+
+# Estado local de la CLI de Salesforce. Acá vive la auth de tus orgs: NUNCA
+# versionar.
+.sf/
+.sfdx/
+
+# 🔒 Registros de investigación con metadata real de una org. Si generás los
+# tuyos, que no salgan del repo por accidente.
+evidencia/
+
+.DS_Store
+Thumbs.db
+*.tmp

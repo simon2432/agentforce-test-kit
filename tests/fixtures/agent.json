@@ -1,0 +1,15 @@
+{
+  "$comment": "FIXTURE anonimizado. Recorte de una corrida real a los campos que lee lib/report.mjs. Los Ids y nombres son ficticios.",
+  "slug": "salud-demo",
+  "apiName": "AGENTFORCE_Agent_Salud_Demo",
+  "label": "AGENTFORCE- Agent Salud Demo",
+  "org": {
+    "alias": "salud-demo",
+    "orgId": "00D000000000000AAA"
+  },
+  "quality": {
+    "respondingTopics": [
+      "GeneralFAQ"
+    ]
+  }
+}

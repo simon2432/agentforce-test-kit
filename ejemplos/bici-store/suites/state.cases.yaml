@@ -1,0 +1,142 @@
+suite: state
+agent: bici-store
+description: >
+  Multi-turno y estado de sesión. Verifica la máquina de estados de la encuesta
+  (no_iniciada -> esperando_nota -> esperando_comentario) y el desvío de ruteo
+  por siembra de state variables.
+
+  ⚠️ La cadena se corta en `esperando_comentario` a propósito. Llegar a `lista`
+  no dispara nada en este fixture, pero un caso de encuesta no se extiende más
+  allá de lo necesario.
+
+  🚨 `encuestaEtapa` es una state variable inocua. NUNCA sembrar un Id real
+  (RoutableId, CaseId): es el único vector que reactiva DML. Ver
+  knowledge/05-safety.md — verificado en la Fase 1: bajo test las variables
+  `linked` llegan todas null.
+
+_paths:
+  etapa: &etapa "{gs.response.planner_response.sessionContext.stateVariables.encuestaEtapa}"
+  nota: &nota "{gs.response.planner_response.sessionContext.stateVariables.encuestaNota}"
+
+cases:
+  # ==========================================================================
+  # P10 — contextVariables desvía el ruteo. Par de control.
+  # ==========================================================================
+
+  - id: V0
+    utterance: ¿A qué hora abren?
+    expect:
+      topic: Faq
+      match: exact
+      actions: [consultar_faq]
+    engines: [run-eval]
+    gate: true
+    severity: routing
+    pair: seed
+    note: >
+      CONTROL SIN SIEMBRA. La misma utterance que V1, sin contextVariables.
+      Sin este caso, un desvío en V1 no prueba que lo haya causado la siembra.
+
+  - id: V1
+    utterance: ¿A qué hora abren?
+    context:
+      encuestaEtapa: esperando_nota
+    expect:
+      topic: Encuesta
+      match: exact
+      stateVariables:
+        encuestaEtapa: esperando_nota
+    engines: [run-eval]
+    gate: true
+    severity: routing
+    pair: seed
+    xfail:
+      reason: >
+        contextVariables NO llega al runtime en este agente. Medido en los dos
+        motores (spec de run-eval y flag de sf agent preview), con los dos
+        namespaces (nombre pelado y $Context.) y para variables Internal y
+        External. El cliente arma el payload correctamente; el runtime lo ignora.
+        Por qué: NO DETERMINADO. Ver VALIDACION.md, Fase 4/P10.
+        🔔 Si este caso pasa a verde, la plataforma cambió: revisar el knowledge/.
+    customEvaluations:
+      - name: string_comparison
+        label: siembra_llega_al_runtime
+        parameters:
+          - { name: operator, value: equals }
+          - { name: actual, value: *etapa }
+          - { name: expected, value: esperando_nota }
+    note: >
+      P10. El router tiene una transición determinista antes de clasificar:
+      `if @variables.encuestaEtapa == "esperando_nota": transition to Encuesta`.
+      Si la siembra funciona, la consulta de Faq se ignora y el ruteo se desvía.
+
+  # ==========================================================================
+  # P9 — las @utils.* no aparecen en invokedActions
+  # ==========================================================================
+
+  - id: V2
+    utterance: No, gracias, eso es todo
+    expect:
+      topic: Encuesta
+      match: exact
+      utilActions: [setEncuestaEtapa]
+      stateVariables:
+        encuestaEtapa: esperando_nota
+    engines: [run-eval]
+    gate: true
+    severity: routing
+    note: >
+      P9. `setEncuestaEtapa` es un @utils.setVariables: se EJECUTA (cambia
+      encuestaEtapa) pero NO aparece en invokedActions, así que expectedActions
+      es ciego a él. Sólo se ve en executionHistory.
+      Transición no_iniciada -> esperando_nota.
+
+  - id: V3
+    utterance: Quiero hablar con una persona
+    expect:
+      topic: human
+      match: contains
+      utilActions: [escalate_to_human]
+    engines: [run-eval]
+    gate: true
+    severity: routing
+    note: >
+      P9, segunda familia: @utils.escalate. Mismo comportamiento que
+      setVariables — se ejecuta, no aparece en invokedActions.
+
+  # ==========================================================================
+  # P11 — multi-turno: run-eval EJECUTA los turnos previos
+  # ==========================================================================
+
+  - id: V4
+    turns:
+      - No, gracias, eso es todo
+    utterance: "5"
+    expect:
+      topic: Encuesta
+      match: exact
+      utilActions: [setEncuestaNota, setEncuestaEtapa]
+      stateVariables:
+        encuestaEtapa: esperando_comentario
+        encuestaNota: "5"
+    engines: [run-eval]
+    gate: true
+    severity: routing
+    customEvaluations:
+      - name: string_comparison
+        label: etapa_avanzo_a_esperando_comentario
+        parameters:
+          - { name: operator, value: equals }
+          - { name: actual, value: *etapa }
+          - { name: expected, value: esperando_comentario }
+      - name: string_comparison
+        label: nota_almacenada
+        parameters:
+          - { name: operator, value: equals }
+          - { name: actual, value: *nota }
+          - { name: expected, value: "5" }
+    note: >
+      P11. El turno previo se EJECUTA de verdad (no se inyecta): el agente tiene
+      que haber pasado por esperando_nota para poder interpretar "5" como nota.
+      Aserción determinista sobre una CONVERSACIÓN, no sobre un turno suelto.
+      Sin captured_agent_turns, este caso es run-eval únicamente.

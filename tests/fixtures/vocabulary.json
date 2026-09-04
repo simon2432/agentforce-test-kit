@@ -1,0 +1,12 @@
+{
+  "$comment": "FIXTURE anonimizado. Sólo las CLAVES de topics, que es lo único que lee clasificar().",
+  "agent": "AGENTFORCE_Agent_Salud_Demo",
+  "botVersionId": "0X9000000000000AAA",
+  "topics": {
+    "GeneralFAQ": {},
+    "SaveSurvey": {},
+    "off_topic": {},
+    "human": {},
+    "Prompt_Injection": {}
+  }
+}
